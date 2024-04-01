@@ -1,0 +1,27 @@
+# Stock App
+A Ruby on Rails project made for Avion School
+
+## Requirements
+### User
+- [ ] I want to create an account to buy and sell stocks
+- [ ] I want to log in my credentials so that I can access my account on the app
+- [ ] I want to receive an email to confirm my pending Account signup
+- [ ] I want to receive an approval Trader Account email to notify me once my account has been approved
+- [ ] I want to buy a stock to add to my investment (Signup should be approved)
+- [ ] I want to have a My Portfolio page to see all my stocks
+- [ ] I want to have a Transaction page to see and monitor all the transactions made by buying and selling stocks
+- [ ] I want to sell my stocks to gain money
+### Admin
+- [ ] I want to create a new trader to manually add them to the app
+- [ ] I want to edit a specific trader to update his/her details
+- [ ] I want to view a specific trader to show his/her details
+- [ ] I want to see all the trader that registered in the app so I can track all the traders
+- [ ] I want to have a page for pending trader sign up to easily check if there's a new trader sign up
+- [ ] I want to approve a trader sign up so that he/she can start adding stocks
+- [ ] I want to see all the transactions so that I can monitor the transaction flow of the app.
+
+## Styles & Tests
+- Bootstrap 
+  - [Installation](https://www.rubydoc.info/gems/bootstrap/5.3.2)
+- Rspec 
+  - [Installation](https://rubygems.org/gems/rspec)
