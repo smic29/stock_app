@@ -25,3 +25,13 @@ A Ruby on Rails project made for Avion School
   - [Installation](https://www.rubydoc.info/gems/bootstrap/5.3.2)
 - Rspec 
   - [Installation](https://rubygems.org/gems/rspec)
+
+## Processes
+### Implementing Mailers:
+#### Resources:
+- [Devise Wiki](https://github.com/heartcombo/devise/wiki/How-To:-Add-:confirmable-to-Users)
+- [Adding Custom mailer](https://github.com/heartcombo/devise/wiki/How-To:-Use-custom-mailer)
+  - Experienced an issue wherein I was getting a name error, but simple troubleshooting was able to resolve this issue.
+  - The custom mailer should be saved in `app/mailers`
+#### Thoughts:
+I should look more into how mailer works overall. At the time of writing, I'm activating the accounts by clicking on the links generated on the console, but I am still unsure of how this will turn out in production.
