@@ -3,6 +3,8 @@ Hello World
 <% if user_signed_in? %>
 You are logged in as <%= current_user.email %>
 <br>
+Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
+<br>
 <%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
 <% else %>
 <%= link_to 'Log In', new_user_session_path %>
