@@ -7,6 +7,8 @@ gem 'bootstrap', '~> 5.3.2'
 gem 'dartsass-sprockets'
 gem "importmap-rails"
 gem "jbuilder"
+gem "jquery-rails"
+gem 'popper_js', '~> 2.11.8'
 gem "puma", ">= 5.0"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem 'rspec', '~> 3.13'
