@@ -1,1 +1,13 @@
 Hello World
+<br>
+<% if user_signed_in? %>
+You are logged in as <%= current_user.email %>
+<br>
+<%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<% else %>
+<%= link_to 'Log In', new_user_session_path %>
+<br>
+or
+<br>
+<%= link_to 'Sign Up', new_user_registration_path %>
+<% end %>

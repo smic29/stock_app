@@ -3,9 +3,9 @@ A Ruby on Rails project made for Avion School
 
 ## Requirements
 ### User
-- [ ] I want to create an account to buy and sell stocks
+- [x] I want to create an account to buy and sell stocks
 - [ ] I want to log in my credentials so that I can access my account on the app
-- [ ] I want to receive an email to confirm my pending Account signup
+- [x] I want to receive an email to confirm my pending Account signup
 - [ ] I want to receive an approval Trader Account email to notify me once my account has been approved
 - [ ] I want to buy a stock to add to my investment (Signup should be approved)
 - [ ] I want to have a My Portfolio page to see all my stocks
