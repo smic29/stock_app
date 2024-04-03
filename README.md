@@ -40,5 +40,7 @@ I should look more into how mailer works overall. At the time of writing, I'm ac
 - [YouTube Video](https://www.youtube.com/watch?v=SxwFyK9OtfY)
 #### Process:
 Added a boolean `admin` column to my user model, then from there, I followed the video resource to create a function in `application_controller` that would check if `current_user.admin?`. If this returns true, it will render that `admin.html.erb` instead of `application.html.erb`.
+
+On adding the admin role to a user, I opted to just use a console rather than creating a separate sign up page. Simply put, I just used a `<% console %>` on my view then accessed `current_user.admin = true`
 #### Thoughts:
 The overall idea of this is to have a controller that would provide all of the admin functions and can only be rendered through the admin layout. But that isn't possible, I will just opt for having the admin role display a separate layout from what the users see.
