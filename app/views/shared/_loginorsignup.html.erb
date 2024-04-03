@@ -1,0 +1,22 @@
+<ul class="nav nav-tabs" data-controller="login">
+  <li class="nav-item" >
+    <%= link_to 'Log in', new_user_session_path, class: "nav-link active",
+        data: {
+            turbo_frame: "login_signup_frame",
+            "data-login-target": "links",
+            action: "click->login#activate"
+        } %>
+    <%# <a class="nav-link active" aria-current="page" href="#">Login</a> %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Register', new_user_registration_path, class: "nav-link",
+        data: {
+            turbo_frame: "login_signup_frame",
+            "data-login-target": "links",
+            action: "click->login#activate"
+        }  %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Coupons</a>
+  </li>
+</ul>

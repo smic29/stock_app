@@ -44,3 +44,8 @@ Added a boolean `admin` column to my user model, then from there, I followed the
 On adding the admin role to a user, I opted to just use a console rather than creating a separate sign up page. Simply put, I just used a `<% console %>` on my view then accessed `current_user.admin = true`
 #### Thoughts:
 The overall idea of this is to have a controller that would provide all of the admin functions and can only be rendered through the admin layout. But that isn't possible, I will just opt for having the admin role display a separate layout from what the users see.
+### Using custom views after generating using `rails g devise:views`
+#### Resources:
+- [Stack Overflow](https://stackoverflow.com/questions/31219466/devise-rails-4-cant-edit-my-new-html-erb-file-under-devise-registration)
+#### Thoughts:
+Spent a considerable amount of time finding out why my turbo frames weren't able to render `sessions/new` under users properly. Apparently, a configuration needs to be enabled within `devise.rb`, then restart server.

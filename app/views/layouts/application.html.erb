@@ -11,8 +11,13 @@
   </head>
 
   <body>
+    <small class="bg-warning position-absolute top-0 px-2 border rounded">
     You are viewing as a user.
-    <br>
-    <%= yield %>
+    </small>
+    <main>
+      <div class="container-fluid align-center">
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
