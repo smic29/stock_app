@@ -6,6 +6,7 @@ gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.3.2'
 gem 'dartsass-sprockets'
 gem "devise", "~> 4.9"
+gem "font-awesome-sass"
 gem "importmap-rails"
 gem "jbuilder"
 gem "jquery-rails"

@@ -1,15 +1,22 @@
   <%= turbo_frame_tag "login_signup_frame" do %>
   <%# <h2>Login</h2> %>
-  <div>
+  <div class="text-center">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field input-group my-2">
+        <i class="fa-regular fa-at input-group-text"></i>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",
+            class: "form-control", placeholder: "Email"
+        %>
       </div>
 
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="field input-group my-2">
+        <%= f.password_field :password, autocomplete: "current-password",
+            class: "form-control", placeholder: "Password"
+        %>
+        <i class="fa-regular fa-eye-slash fa-2xs input-group-text"
+           data-controller="login"
+           data-action="click->login#visibility"
+          ></i>
       </div>
 
       <% if devise_mapping.rememberable? %>
