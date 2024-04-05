@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_action :has_admin_access, only: [ :index ]
   def index
-    @users = User.all
+    @users = User.all.where.not(id: current_user.id)
   end
 
   private

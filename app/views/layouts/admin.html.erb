@@ -16,7 +16,7 @@
     </small>
     <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,
     class: "position-absolute top-0 end-0 btn btn-outline-danger btn-sm" %>
-    <main>
+    <main class="align-self-start mt-5 container-fluid">
       <%= yield %>
     </main>
   </body>

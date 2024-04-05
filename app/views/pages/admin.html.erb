@@ -1,5 +1,6 @@
 Welcome <%= current_user.email %>
+<div class="">
+    <%= turbo_frame_tag "admin_dash", src: admin_index_path do %>
 
-<%= turbo_frame_tag "admin_dash", src: admin_index_path do %>
-
-<% end %>
+    <% end %>
+</div>
