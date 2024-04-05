@@ -58,3 +58,7 @@ Made an admin controller that would do checks on whether there is a `current_use
 Since my login page is located at the root, I also added a redirect on my pages controller so that when a login is completed and it's found that the user is an admin, they would get routed to the proper page.
 #### Thoughts:
 This could've probably be done better, but I chose to try and implement this on my own using minimal resources. I'll probably circle back to this at a later time or will keep as is -- really depends if I find it necessary.
+
+Ideas to make it better:
+- Alter devise's `after_sign_in_path_for` helper and have checks made there? 
+  - [Resource that could help](https://github.com/heartcombo/devise/blob/main/lib/devise/controllers/helpers.rb#L217)
