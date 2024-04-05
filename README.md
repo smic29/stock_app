@@ -59,6 +59,8 @@ Since my login page is located at the root, I also added a redirect on my pages 
 #### Thoughts:
 This could've probably be done better, but I chose to try and implement this on my own using minimal resources. I'll probably circle back to this at a later time or will keep as is -- really depends if I find it necessary.
 
+I also made an admin method in my pages controller just to have a landing page for the admin. Doing this, I felt like there should be a much better method of implementation here, but I can't figure it out right now.
+
 Ideas to make it better:
 - Alter devise's `after_sign_in_path_for` helper and have checks made there? 
   - [Resource that could help](https://github.com/heartcombo/devise/blob/main/lib/devise/controllers/helpers.rb#L217)
