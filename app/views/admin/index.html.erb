@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "admin_dash" do %>
+
+<% @users.each do |user| %>
+    <div>
+        <%= user.email %>
+    </div>
+<% end %>
+
+<% end %>

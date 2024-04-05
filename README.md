@@ -15,7 +15,7 @@ A Ruby on Rails project made for Avion School
 - [ ] I want to create a new trader to manually add them to the app
 - [ ] I want to edit a specific trader to update his/her details
 - [ ] I want to view a specific trader to show his/her details
-- [ ] I want to see all the trader that registered in the app so I can track all the traders
+- [x] I want to see all the trader that registered in the app so I can track all the traders
 - [ ] I want to have a page for pending trader sign up to easily check if there's a new trader sign up
 - [ ] I want to approve a trader sign up so that he/she can start adding stocks
 - [ ] I want to see all the transactions so that I can monitor the transaction flow of the app.
@@ -51,3 +51,10 @@ The overall idea of this is to have a controller that would provide all of the a
 - [Stack Overflow](https://stackoverflow.com/questions/31219466/devise-rails-4-cant-edit-my-new-html-erb-file-under-devise-registration)
 #### Thoughts:
 Spent a considerable amount of time finding out why my turbo frames weren't able to render `sessions/new` under users properly. Apparently, a configuration needs to be enabled within `devise.rb`, then restart server.
+### Making sure admin and user are shown different pages on login
+#### Process:
+Made an admin controller that would do checks on whether there is a `current_user` and if that user is an admin: `current_user&.admin` (saw this shorthand code from somewhere, it's meant to simplify this: `current_user && current_user.admin`). This is also to make sure that the manual routes I intend to add for the admin controller cannot be utilized if the user isn't an admin. 
+
+Since my login page is located at the root, I also added a redirect on my pages controller so that when a login is completed and it's found that the user is an admin, they would get routed to the proper page.
+#### Thoughts:
+This could've probably be done better, but I chose to try and implement this on my own using minimal resources. I'll probably circle back to this at a later time or will keep as is -- really depends if I find it necessary.
