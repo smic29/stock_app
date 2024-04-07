@@ -1,4 +1,8 @@
-Welcome <%= current_user.email %>
+Welcome <%= current_user.email %>! <br>
+
+<button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#appModal">
+    Add a User
+</button>
 <div class="">
     <%= turbo_frame_tag "admin_dash", src: admin_index_path do %>
 
