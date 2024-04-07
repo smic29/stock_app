@@ -1,3 +1,41 @@
 <%= turbo_frame_tag "modal_frame" do %>
-    <h1>Hello World!</h1>
+    <div>
+        <%= form_with model: @user, url: new_admin_path do |f| %>
+            <% if @user.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved</h2>
+                    <ul>
+                        <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+
+            <div class="field form-floating my-2">
+                <%= f.text_field :email, required: true, autocomplete: "off", autofocus: true, placeholder: "Email", class: "form-control form-control-sm" %>
+                <%= f.label :email %>
+            </div>
+
+            <div class="field form-floating my-2">
+                <%= f.text_field :password, required: true, placeholder: "Password", class: "form-control form-control-sm", value: @random_password, disabled: true %>
+                <%= f.label :password %>
+            </div>
+
+            <div class="field form-floating my-2">
+                <%= f.number_field :cash, min: "0", class: "form-control form-control-sm" %>
+                <%= f.label :cash %>
+            </div>
+
+            <div class="form-check">
+                <%= f.check_box :approved, class: "form-check-input" %>
+                <%= f.label :approved, "Allow trading", class: "form-check-label" %>
+            </div>
+
+            <div class="actions text-center">
+                <%= f.submit "Create User", class: "btn btn-sm btn-outline-success" %>
+            </div>
+            
+        <% end %>
+    </div>
 <% end %>
