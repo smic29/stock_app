@@ -1,5 +1,8 @@
-<%= turbo_frame_tag "admin_dash" do %>
+<button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#appModal">
+    Add a User
+</button>
 
+<%= turbo_frame_tag "admin_dash" do %>
     <table class="table">
         <thead>
             <tr>
@@ -20,5 +23,4 @@
         <% end %>
         </tbody>
     </table>
-
 <% end %>
