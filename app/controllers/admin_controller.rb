@@ -15,6 +15,15 @@ class AdminController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.skip_confirmation!
+
+    respond_to do |format|
+      if @user.save
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -24,6 +33,6 @@ class AdminController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :cash, :password, :approved)
+    params.require(:user).permit(:email, :cash, :password, :password_confirmation, :approved)
   end
 end

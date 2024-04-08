@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal_frame" do %>
     <div>
-        <%= form_with model: @user, url: new_admin_path do |f| %>
+        <%= form_with model: @user, url: admin_index_path do |f| %>
             <% if @user.errors.any? %>
                 <div id="error_explanation">
                     <h2><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved</h2>
@@ -18,8 +18,8 @@
             </div>
 
             <div class="field form-floating my-2">
-                <%= f.password_field :password, required: true, placeholder: "Password", class: "form-control form-control-sm", value: @random_password, disabled: true %>
-                <%= f.label :password %>
+                <%= f.password_field :password, required: true, placeholder: "Password", class: "form-control-plaintext form-control-sm", value: @random_password, readonly: true %>
+                <%= f.label :password, "Randomly-generated Password" %>
             </div>
 
             <%= f.hidden_field :password_confirmation, value: @random_password %>
