@@ -87,7 +87,7 @@ On successful creation, an email will be sent to the email address provided whic
     end
     ```
     would look for a file named `welcome_email.html.erb` under the `views/mailer` folder. I opted to add a `default template_path: 'admin/mailer'` to my `admin_mailer.rb` file in order to have mailers generating from the admin organized.
-- In order to close the modal and reset the form when a successful form submission is made, I made use of the `turbo:submit-end` event. I added a stimulus action to the form with `data: { action: "turbo:submit-end": "modal#submit" }`. To close the modal, it took a bit of googling, but I found that bootstrap has jQuery code for its modal components:
+- In order to close the modal and reset the form when a successful form submission is made, I made use of the `turbo:submit-end` event. I added a stimulus action to the form with `data: { action: "turbo:submit-end->modal#submit" }`. To close the modal, it took a bit of googling, but I found that bootstrap has jQuery code for its modal components:
   ```js
     $('#appModal').modal('hide')
   ```
