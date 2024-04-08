@@ -12,7 +12,7 @@ A Ruby on Rails project made for Avion School
 - [ ] I want to have a Transaction page to see and monitor all the transactions made by buying and selling stocks
 - [ ] I want to sell my stocks to gain money
 ### Admin
-- [ ] I want to create a new trader to manually add them to the app
+- [x] I want to create a new trader to manually add them to the app
 - [ ] I want to edit a specific trader to update his/her details
 - [ ] I want to view a specific trader to show his/her details
 - [x] I want to see all the trader that registered in the app so I can track all the traders
@@ -64,3 +64,12 @@ I also made an admin method in my pages controller just to have a landing page f
 Ideas to make it better:
 - Alter devise's `after_sign_in_path_for` helper and have checks made there? 
   - [Resource that could help](https://github.com/heartcombo/devise/blob/main/lib/devise/controllers/helpers.rb#L217)
+### Implementing admin manual user creation
+#### Process:
+Once the logged-in admin initiates a user creation, a form will need to be filled up. The password is randomly generated just to add some privacy for the would-be user (the plan is for the password to be emailed). A `skip_confirmation!` is also done in the `create` action to make sure an email confirmation is no longer required.
+
+A hidden field is also added within the form for the `password_confirmation` needed by the devise gem(Warden).
+#### Learnings:
+- Learned that disabled `<input>` would not be included on the params on form submit. Instead, a good way would to just use `readonly`. Since it would have the same effect of not allowing selection and editing.
+#### Thoughts:
+The plan going forward with this is to also send an email to the user which contains their password. This is because the admin would have no way of seeing the user's password.
