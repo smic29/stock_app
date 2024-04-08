@@ -64,12 +64,28 @@ I also made an admin method in my pages controller just to have a landing page f
 Ideas to make it better:
 - Alter devise's `after_sign_in_path_for` helper and have checks made there? 
   - [Resource that could help](https://github.com/heartcombo/devise/blob/main/lib/devise/controllers/helpers.rb#L217)
-### Implementing admin manual user creation
+### Implementing admin manual user creation with confirmation mailer
+#### Resources:
+- [Ruby docs: Devise skip_confirmation!](https://www.rubydoc.info/github/plataformatec/devise/Devise%2FModels%2FConfirmable:skip_confirmation!)
+- [Stack Oveflow: disabled inputs will not be submitted](https://stackoverflow.com/questions/1355728/values-of-disabled-inputs-will-not-be-submitted)
+- [Ruby Guides: ActionMailer](https://guides.rubyonrails.org/action_mailer_basics.html)
 #### Process:
-Once the logged-in admin initiates a user creation, a form will need to be filled up. The password is randomly generated just to add some privacy for the would-be user (the plan is for the password to be emailed). A `skip_confirmation!` is also done in the `create` action to make sure an email confirmation is no longer required.
+Once the logged-in admin initiates a user creation, a form will need to be filled up. The password is randomly generated just to add some privacy for the would-be user. A `skip_confirmation!` is also done in the `create` action to make sure an email confirmation is no longer required.
 
-A hidden field is also added within the form for the `password_confirmation` needed by the devise gem(Warden).
+A hidden field is also added within the form for the `password_confirmation` needed for the registration to be successful. The password is also saved as an instance variable using `user_params[:password]` so that it could be passed on to the mailer.
+
+On successful creation, an email will be sent to the email address provided which includes the user's password and a reminder to change it right away.
 #### Learnings:
 - Learned that disabled `<input>` would not be included on the params on form submit. Instead, a good way would to just use `readonly`. Since it would have the same effect of not allowing selection and editing.
+- In mailer view, using `_path` would not work. Tried out a bunch of things, including `url_for`, but what ultimately fixed the issue is using `_url` instead.
+- Files under `app/mailer` act similar to a controller and would look for a corresponding `.html.erb` file with the same action name. Like how this action:
+  ```ruby
+    def welcome_email
+        @user = params[:user]
+        @password = params[:password]
+        mail(to: @user.email, subject: 'Welcome to Stock App')
+    end
+    ```
+    would look for a file named `welcome_email.html.erb` under the `views/mailer` folder. I opted to add a `default template_path: 'admin/mailer'` to my `admin_mailer.rb` file in order to have mailers generating from the admin organized.
 #### Thoughts:
-The plan going forward with this is to also send an email to the user which contains their password. This is because the admin would have no way of seeing the user's password.
+While I think that the password thing is a nice touch. I think it could be done a bit better. Looking into how I've implemented everything, I noticed that I was exposing the password in a lot of places. Once all requirements are done, I may come back to this and implement it a bit better.

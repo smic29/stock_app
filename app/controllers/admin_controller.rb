@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_action :has_admin_access, only: [ :index ]
+  before_action :has_admin_access, only: [ :index, :new ]
   include PasswordGenerator
 
   helper_method :generate_random_password
@@ -16,10 +16,12 @@ class AdminController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.skip_confirmation!
+    @password = user_params[:password]
 
     respond_to do |format|
       if @user.save
         format.turbo_stream
+        AdminMailer.with(user: @user, password: @password).welcome_email.deliver_later
       else
         format.html { render :new, status: :unprocessable_entity }
       end

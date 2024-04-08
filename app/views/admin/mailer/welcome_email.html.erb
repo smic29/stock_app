@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Stock App!</h1>
+    <p>
+      You have successfully signed up to Stock App!
+      your temporary password is: <%= @password %>. We strongly advise to change this as soon as possible.
+
+      <% if @user.approved %>
+      For you to start off, we've given you a complimentary signup bonus of:
+      <h3><%= @user.cash %></h3><br>
+
+      Log in and start trading now! <%= link_to "Stock app", root_url %>
+      <% else %>
+      To start trading, please wait patiently for our team to review your account and approve your trading privileges. Rest assured, that you will be notified once it has been activated!
+
+      In the meantime, you can still login and get quotes from stocks you've been eyeing-out. <%= link_to 'Stock app', root_url %>
+      <% end %>
+    </p>
+    <p>
+      Thanks for signing up and we hope to be alongside your success!
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
