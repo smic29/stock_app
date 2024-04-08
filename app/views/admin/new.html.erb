@@ -1,6 +1,9 @@
 <%= turbo_frame_tag "modal_frame" do %>
     <div>
-        <%= form_with model: @user, url: admin_index_path do |f| %>
+        <%= form_with model: @user, url: admin_index_path, data: { 
+            controller: "modal",
+            action: "turbo:submit-end->modal#submit"
+            } do |f| %>
             <% if @user.errors.any? %>
                 <div id="error_explanation">
                     <h2><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved</h2>

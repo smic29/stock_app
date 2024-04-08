@@ -14,4 +14,11 @@ export default class extends Controller {
     frame.src = url
     modalTitle.innerHTML = title
   }
+
+  submit(e){
+    if (e.detail.formSubmission.result.success) {
+      this.element.reset()
+      $('#appModal').modal('hide')
+    }
+  }
 }
