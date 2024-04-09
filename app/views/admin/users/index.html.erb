@@ -19,10 +19,7 @@
             <tbody class="table-group-divider">
             <% @users.each do |user| %>
                 <tr>
-                    <td><%= user.email %></td>
-                    <td><%= user.cash %></td>
-                    <td class="text-center"><%= user.approved ? "1" : "0" %></td>
-                    <td class="text-center"><%= user.confirmed? %></td>
+                    <%= render user %>
                 </tr>
             <% end %>
             </tbody>
