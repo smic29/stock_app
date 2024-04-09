@@ -1,31 +1,5 @@
 <%= turbo_frame_tag "admin_dash" do %>
-    <%= link_to 'Add a User', new_admin_path, class: "btn btn-outline-success btn-sm", data: {
-        controller: "modal",
-        action: "click->modal#open",
-        bs_toggle: "modal",
-        bs_target: "#appModal"
-    } %>
+Testing my routes
 
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">Email</th>
-                    <th scope="col">Cash</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Confirmed?</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <% @users.each do |user| %>
-                <tr>
-                    <td><%= user.email %></td>
-                    <td><%= user.cash %></td>
-                    <td class="text-center"><%= user.approved ? "1" : "0" %></td>
-                    <td class="text-center"><%= user.confirmed? %></td>
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
-    </div>
+<%= link_to 'users', admin_users_path %>
 <% end %>

@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+
+
+  def has_admin_access
+    redirect_to root_path if !current_user&.admin
+  end
+
 end

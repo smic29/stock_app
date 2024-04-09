@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal_frame" do %>
     <div>
-        <%= form_with model: @user, url: admin_index_path, data: { 
+        <%= form_with model: @user, url: admin_users_path, data: { 
             controller: "modal",
             action: "turbo:submit-end->modal#submit"
             } do |f| %>

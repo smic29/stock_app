@@ -94,3 +94,27 @@ On successful creation, an email will be sent to the email address provided whic
   ```
 #### Thoughts:
 While I think that the password thing is a nice touch. I think it could be done a bit better. Looking into how I've implemented everything, I noticed that I was exposing the password in a lot of places. Once all requirements are done, I may come back to this and implement it a bit better.
+### Routes Organization
+#### Resources:
+- [Rails Guides: Routes](https://guides.rubyonrails.org/routing.html)
+#### Process:
+Coming into this project, I still had some confusion with regards to routes. So I spent time trying to understand it more.
+
+When I was implementing user actions with regard to the admin, I checked my routes and noticed that while I using `resources :admin`, the routes really didn't make much sense. Since I was creating and updating a user using `/admin` via post.
+
+Looking into how routes, controllers, and views interact with each other. I learned that it's possible to just have an `admin_controller` which would be in the `/admin` route, and use a namespace with the `user_controller` so that I could have routes like `/admin/users`, for example.
+
+This led to me updating my `routes.rb` file to:
+```ruby
+resources :admin, only: [:index]
+namespace :admin do
+  resources :users
+end
+```
+This would let me have a `/admin` route where I could stage my turbo frames, and have dedicated routes for RESTful actions for users, such as `/admin/users`, `admin/users/new`, et.al.
+
+While this helped with my routes, I was still confused with how a namespace would interact(or connect?) with these routes. Studying the code and guides more, I noticed that namespacing in the `routes.rb` would also make rails look into the controllers and views folder structure the same way. Like how with `/admin` it would look for an `admin_controller.rb` file in `app/controllers/`.
+
+With that in mind, if I had a route that is `admin/users` it would look for a `users_controller.rb` file in my `app/controllers/admin/` folder. I would just have to namespace that controller with `Admin::UsersController`. This would then work the same way with views.
+#### Thoughts
+Moving forward, I'll be studying modules and object-oriented programming more to understand how everything works. I think this is just surface-level understanding, but I'm proud and happy with myself that I finally understood how routing works.
