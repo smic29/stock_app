@@ -1,4 +1,6 @@
-<td><%= user.email %></td>
-<td><%= user.cash %></td>
-<td class="text-center"><%= user.approved ? "1" : "0" %></td>
-<td class="text-center"><%= user.confirmed? %></td>
+<tr id=<%= dom_id(user)%> data-bs-toggle="modal" data-bs-target="#appModal" data-action="click->modal#open" data-controller="modal" href=<%= admin_user_url(user) %>>
+    <td><%= user.email %></td>
+    <td><%= user.cash %></td>
+    <td class="text-center"><%= user.approved ? "1" : "0" %></td>
+    <td class="text-center"><%= user.confirmed? %></td>
+</tr>

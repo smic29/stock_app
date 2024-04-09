@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "modal_frame" do %>
+<div>
+    <% if @user.approved && @user.confirmed? %>
+    <small class="bg-success p-1 px-2 rounded text-white bold">Verified Trader</small>
+    <% end %>
+    <% unless @user.approved? %>
+    <small class="bg-warning p-1 rounded px-2">Pending Trader</small>
+    <% end %>
+    <% unless @user.confirmed? %>
+    <small class="bg-danger p-1 px-2 rounded">Unverified User</small>
+    <% end %>
+    <div class="form-floating my-2">
+        <input type="number" id="floatingInput" class="form-control-plaintext" readonly value="<%= @user.cash%>" >
+        <label for="floatingInput">Current funds</label>
+    </div>
+</div>
+<% end %>

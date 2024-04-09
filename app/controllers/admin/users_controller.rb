@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
-  before_action :has_admin_access, only: [ :index, :new ]
+  before_action :has_admin_access, only: [ :index, :new, :show ]
+  before_action :set_user, only: [ :show ]
+
   include PasswordGenerator
 
   helper_method :generate_random_password
@@ -28,7 +30,15 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:email, :cash, :password, :password_confirmation, :approved)

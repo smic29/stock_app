@@ -6,8 +6,8 @@ export default class extends Controller {
   }
 
   open() {
-    const url = this.element.href
-    const title = this.element.innerHTML
+    const url = this.element.getAttribute('href')
+    const title = this.element.tagName === 'TR' ? this.element.firstElementChild.innerHTML : this.element.innerHTML
     const frame = document.querySelector('#modal_frame')
     const modalTitle = document.querySelector('.modal-title')
 
@@ -20,5 +20,9 @@ export default class extends Controller {
       this.element.reset()
       $('#appModal').modal('hide')
     }
+  }
+
+  show(){
+    console.log(this.element.getAttribute('href'))
   }
 }
