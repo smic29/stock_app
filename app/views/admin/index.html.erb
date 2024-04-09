@@ -1,11 +1,11 @@
-<%= link_to 'Add a User', new_admin_path, class: "btn btn-outline-success btn-sm", data: {
-    controller: "modal",
-    action: "click->modal#open",
-    bs_toggle: "modal",
-    bs_target: "#appModal"
-} %>
-
 <%= turbo_frame_tag "admin_dash" do %>
+    <%= link_to 'Add a User', new_admin_path, class: "btn btn-outline-success btn-sm", data: {
+        controller: "modal",
+        action: "click->modal#open",
+        bs_toggle: "modal",
+        bs_target: "#appModal"
+    } %>
+
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>

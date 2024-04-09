@@ -69,6 +69,7 @@ Ideas to make it better:
 - [Ruby docs: Devise skip_confirmation!](https://www.rubydoc.info/github/plataformatec/devise/Devise%2FModels%2FConfirmable:skip_confirmation!)
 - [Stack Oveflow: disabled inputs will not be submitted](https://stackoverflow.com/questions/1355728/values-of-disabled-inputs-will-not-be-submitted)
 - [Ruby Guides: ActionMailer](https://guides.rubyonrails.org/action_mailer_basics.html)
+- [Turbo Handbook: Form events with Turbo](https://turbo.hotwired.dev/reference/events#forms)
 #### Process:
 Once the logged-in admin initiates a user creation, a form will need to be filled up. The password is randomly generated just to add some privacy for the would-be user. A `skip_confirmation!` is also done in the `create` action to make sure an email confirmation is no longer required.
 
