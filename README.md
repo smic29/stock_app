@@ -14,7 +14,7 @@ A Ruby on Rails project made for Avion School
 ### Admin
 - [x] I want to create a new trader to manually add them to the app
 - [ ] I want to edit a specific trader to update his/her details
-- [ ] I want to view a specific trader to show his/her details
+- [x] I want to view a specific trader to show his/her details
 - [x] I want to see all the trader that registered in the app so I can track all the traders
 - [ ] I want to have a page for pending trader sign up to easily check if there's a new trader sign up
 - [ ] I want to approve a trader sign up so that he/she can start adding stocks
