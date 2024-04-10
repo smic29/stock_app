@@ -8,6 +8,6 @@ class AdminController < ApplicationController
   end
 
   def pending
-
+    @users = User.is_pending_approval.order(:confirmed_at)
   end
 end

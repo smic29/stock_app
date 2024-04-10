@@ -16,7 +16,7 @@ A Ruby on Rails project made for Avion School
 - [ ] I want to edit a specific trader to update his/her details
 - [x] I want to view a specific trader to show his/her details
 - [x] I want to see all the trader that registered in the app so I can track all the traders
-- [ ] I want to have a page for pending trader sign up to easily check if there's a new trader sign up
+- [x] I want to have a page for pending trader sign up to easily check if there's a new trader sign up
 - [ ] I want to approve a trader sign up so that he/she can start adding stocks
 - [ ] I want to see all the transactions so that I can monitor the transaction flow of the app.
 
@@ -118,3 +118,21 @@ While this helped with my routes, I was still confused with how a namespace woul
 With that in mind, if I had a route that is `admin/users` it would look for a `users_controller.rb` file in my `app/controllers/admin/` folder. I would just have to namespace that controller with `Admin::UsersController`. This would then work the same way with views.
 #### Thoughts
 Moving forward, I'll be studying modules and object-oriented programming more to understand how everything works. I think this is just surface-level understanding, but I'm proud and happy with myself that I finally understood how routing works.
+
+### Implementing a dedicated page for pending trader approval
+#### Resources:
+- [Ruby Guides: How to Use Scopes](https://www.rubyguides.com/2019/10/scopes-in-ruby-on-rails/)
+#### Process:
+I decided to use the admin controller to display the current pending user trader approvals just so I don't put to many non-CRUD actions in the namespaced admin controller for user.
+
+First I made some scopes in my user model:
+```ruby
+scope :is_verified_trader, -> { where(approved: true, admin: false).where.not(confirmed_at:nil) }
+scope :is_pending_approval, -> { where(approved: false, admin: false).where.not(confirmed_at:nil) }
+scope :is_a_user, -> { where(admin: false) }
+```
+This is so that my admin controller won't have long code and some scopes are also used in the namespaced admin controller.
+
+After which I've made a `pending` action that would display users by running `User.is_pending_aprroval.order(:confirmed_at)`. As per the scope, only users which have confirmed their emails would be eligible to be approved.
+#### Thoughts:
+I plan to add some more methods in the user model just to abstract away some of the long code I'm using in controllers and views. Some studying is still required, but I'll get it eventually. As of writing, I don't see anything wrong with my implementation of this, but still, this could prove wrong when I start coding tests -- which I should've done alongside coding everything, but I was lazy. Yeah, gots to change that.
