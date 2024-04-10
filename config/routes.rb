@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "admin" => "admin#home"
-  get "admin/pending" => "admin#pending", as: :pending_approval
+  # get "admin" => "admin#home"
+  # get "admin/pending" => "admin#pending", as: :pending_approval
+  # Keeping above code here in case I come to a better implementation
+
+  scope '/admin' do
+    get "/" => "admin#home", as: :admin
+    get "pending" => "admin#pending", as: :pending_approval
+  end
   namespace :admin do
     resources :users
   end

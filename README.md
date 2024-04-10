@@ -116,8 +116,22 @@ This would let me have a `/admin` route where I could stage my turbo frames, and
 While this helped with my routes, I was still confused with how a namespace would interact(or connect?) with these routes. Studying the code and guides more, I noticed that namespacing in the `routes.rb` would also make rails look into the controllers and views folder structure the same way. Like how with `/admin` it would look for an `admin_controller.rb` file in `app/controllers/`.
 
 With that in mind, if I had a route that is `admin/users` it would look for a `users_controller.rb` file in my `app/controllers/admin/` folder. I would just have to namespace that controller with `Admin::UsersController`. This would then work the same way with views.
+
+After looking more into scopes, I found that the routes I intended to have were possible. The idea is to have restful actions for user under the admin namespace, but what I couldn't figure out is how to use `/admin` for my `AdminController`. From studying and testing, I found that I can scope it like so:
+```ruby
+scope '/admin' do
+  get "/" => "admin#home", as: :admin
+  get "pending" => "admin#pending", as: :pending_approval
+end
+namespace :admin do
+  resources :users
+end
+```
+I'll be using `/admin` for other stuff besides doing CRUD actions with the user, I chose to scope it.
 #### Thoughts
 Moving forward, I'll be studying modules and object-oriented programming more to understand how everything works. I think this is just surface-level understanding, but I'm proud and happy with myself that I finally understood how routing works.
+
+After learning about scopes, I think I'll continue to study more about routing just to make sure all my routes are optimal.
 
 ### Implementing a dedicated page for pending trader approval
 #### Resources:
