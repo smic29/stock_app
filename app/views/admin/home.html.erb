@@ -1,5 +1,9 @@
 <%= turbo_frame_tag "admin_dash" do %>
-Testing my routes
+The app currently has <%= @user_count %>
 
 <%= link_to 'users', admin_users_path %>
+<br>
+There are <%= @trader_request_count %> pending trading approval requests.
+<br>
+Number of verified traders: <%= @verified_traders_count %>
 <% end %>

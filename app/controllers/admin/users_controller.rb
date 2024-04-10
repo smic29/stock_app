@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   helper_method :generate_random_password
 
   def index
-    @users = User.all.where.not(id: current_user.id)
+    @users = User.is_a_user
   end
 
   def new
