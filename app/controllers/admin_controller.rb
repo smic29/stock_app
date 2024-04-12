@@ -18,6 +18,7 @@ class AdminController < ApplicationController
         respond_to do |format|
           format.turbo_stream
         end
+        AdminMailer.with(user: @user).trade_approved_email.deliver_later
       end
     end
   end
