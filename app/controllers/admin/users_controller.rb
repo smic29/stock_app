@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :has_admin_access, only: [ :index, :new, :show, :edit ]
-  before_action :set_user, only: [ :show, :edit ]
+  before_action :has_admin_access, only: [ :index, :new, :show, :edit, :update ]
+  before_action :set_user, only: [ :show, :edit, :update ]
 
   include PasswordGenerator
 
@@ -36,6 +36,14 @@ class Admin::UsersController < ApplicationController
 
   def edit
 
+  end
+
+  def update
+    if @user.update(user_params)
+      render :show
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
