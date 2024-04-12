@@ -14,10 +14,12 @@
     <small class="bg-warning position-absolute top-0 px-2 border rounded">
     You are viewing as a user.
     </small>
+    <% if user_signed_in? %>
+      <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,
+      class: "position-absolute top-0 end-0 btn btn-outline-danger btn-sm" %>
+    <% end %>
     <main>
-      <div class="container-fluid align-center">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </main>
   </body>
 </html>

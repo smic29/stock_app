@@ -1,18 +1,21 @@
-<br>
 <% if user_signed_in? %>
-You are logged in as <%= current_user.email %>
-<br>
-Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
-<br>
-You have <%= current_user.cash %>
-<br>
-<%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
+    <br>
+    You are logged in as <%= current_user.email %>
+    <br>
+    Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
+    <br>
+    You have <%= current_user.cash %>
+    <br>
+    Testing Endpoint: <br>
+    <%= @data %>
 <% else %>
-<div class="border rounded p-1">
-    <%= render 'shared/loginorsignup' %>
-    <%= turbo_frame_tag "login_signup_frame", src: new_user_session_path, target: :_top do %>
-    hi
+    <div class="container-fluid align-center">
+        <div class="border rounded p-1">
+            <%= render 'shared/loginorsignup' %>
+            <%= turbo_frame_tag "login_signup_frame", src: new_user_session_path, target: :_top do %>
+            hi
 
-    <% end %>
-</div>
+            <% end %>
+        </div>
+    </div>
 <% end %>
