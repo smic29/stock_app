@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :has_admin_access, only: [ :index, :new, :show ]
-  before_action :set_user, only: [ :show ]
+  before_action :has_admin_access, only: [ :index, :new, :show, :edit ]
+  before_action :set_user, only: [ :show, :edit ]
 
   include PasswordGenerator
 
@@ -34,6 +34,10 @@ class Admin::UsersController < ApplicationController
 
   end
 
+  def edit
+
+  end
+
   private
 
   def set_user
@@ -41,6 +45,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :cash, :password, :password_confirmation, :approved)
+    params.require(:user).permit(:email, :cash, :password, :password_confirmation, :approved, :name)
   end
 end
