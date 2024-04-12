@@ -7,4 +7,9 @@ class AdminMailer < ApplicationMailer
     @password = params[:password]
     mail(to: @user.email, subject: 'Welcome to Stock App')
   end
+
+  def trade_approved_email
+    @user = params[:user]
+    mail(to: @user.email, subject: 'Your Trading Access Has Been Approved!')
+  end
 end

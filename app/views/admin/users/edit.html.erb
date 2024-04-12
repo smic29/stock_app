@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "modal_frame" do %>
+    <%= form_with(model: @user, url: admin_user_path(@user)) do |f| %>
+        <small class="bg-secondary p-1 rounded text-white">Editing</small>
+        <div class="d-flex gap-1">
+            <div class="form-floating my-2">
+                <%= f.number_field :cash, disabled: true, class:"form-control" %>
+                <%= f.label :cash, class:"form-label" %>
+            </div>
+
+            <div class="field form-floating my-2">
+                <%= f.text_field :name, class:"form-control" %>
+                <%= f.label :name, "Display Name", class:"form-label" %>
+            </div>
+        </div>
+
+        <div class="actions text-center">
+            <%= f.submit "Save", class: "btn btn-sm btn-outline-success" %>
+            <%= link_to 'Cancel', admin_user_path(@user), class: "btn btn-sm btn-outline-danger" %>
+        </div>
+    <% end %>
+<% end %>

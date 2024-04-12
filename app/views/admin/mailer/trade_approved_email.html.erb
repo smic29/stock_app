@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Congratulations! You have been approved!</h1>
+    <p>
+      Hi <%= @user.email %>
+      
+      We're excited to inform you that your trading access has been approved! 🎉
+
+      You can now start buying and selling stocks on our app. Get ready to dive into the world of investing and take control of your financial future!
+
+      As a welcome bonus, you can now use your complimentary $<%= @user.cash %>!
+    </p>
+    <p>
+      Thanks for signing up and we hope to be alongside your success!
+    </p>
+    <p>Happy Trading!</p>
+    <p>StockApp Team</p>
+  </body>
+</html>
