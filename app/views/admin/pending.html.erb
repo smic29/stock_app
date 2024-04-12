@@ -12,10 +12,12 @@
             </thead>
             <tbody class="table-group-divider">
             <% @users.each do |user| %>
-                <tr>
+                <tr id=<%= dom_id(user)%>>
                     <td><%= user.email %></td>
                     <td class="small"><%= "#{time_ago_in_words user.confirmed_at} ago" %></td>
-                    <td><button>Approve</button></td>
+                    <td>
+                        <%= button_to "Approve", user_approve_path(user.id), method: :patch, class: "btn btn-sm btn-outline-success" %>
+                    </td>
                 </tr>
             <% end %>
             </tbody>

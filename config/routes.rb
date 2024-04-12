@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     get "/" => "admin#home", as: :admin
     get "pending" => "admin#pending", as: :pending_approval
+    patch "approve/:id" => "admin#approve", as: :user_approve
   end
   namespace :admin do
     resources :users
