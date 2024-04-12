@@ -9,8 +9,8 @@ class AdminController < ApplicationController
     @verified_traders_count = User.is_verified_trader.count
 
     query = YahooFinance::Query.new
-    @data = query.quote('nvda')['nvda']
-    #appl used for testing
+    @data = query.quote('nba')['nba']
+    #aapl used for testing
   end
 
   def pending

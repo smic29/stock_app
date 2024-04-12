@@ -150,3 +150,23 @@ This is so that my admin controller won't have long code and some scopes are als
 After which I've made a `pending` action that would display users by running `User.is_pending_aprroval.order(:confirmed_at)`. As per the scope, only users which have confirmed their emails would be eligible to be approved.
 #### Thoughts:
 I plan to add some more methods in the user model just to abstract away some of the long code I'm using in controllers and views. Some studying is still required, but I'll get it eventually. As of writing, I don't see anything wrong with my implementation of this, but still, this could prove wrong when I start coding tests -- which I should've done alongside coding everything, but I was lazy. Yeah, gots to change that.
+### Endpoint for Stock Prices
+#### Resources:
+- [Basic Yahoo Finance Gem](https://github.com/towards/basic_yahoo_finance/blob/main/README.md)
+#### Process:
+With the basis of the Basic Yahoo Finance gem, I made a `yahoo_finance.rb` file under the project's `/lib` folder. The file is closely built around how the gem makes external API requests and parsing of the json response from the request made.
+
+In order to use it, a controller needs to require it:
+```ruby
+require 'yahoo_finance'
+
+# And to initialize the code:
+query = YahooFinance::Query.new
+data = query.quote('symbol')
+```
+
+The url we make requests from is from Yahoo Finance, and since the gem no longer has the updated url to make requests from, I chose to just reference the gem and create my own file.
+
+As to how I found the url to use, I did a project for CS50 and upon reading the provided helper code, I found the base url used to make queries. When I found the basic_yahoo_finance gem, I found that it used the same url, but it was no longer working. Also, the project I was doing under CS50, didn't really utilize JSON responses, but instead was downloading CSV files then parsing that.
+
+I'm still in the process of exploring what data I want to parse from the response, so at this time I'm only getting a `.sample` from the array returned from getting a particular time period's adjusted closing prices. I guess this is also to simulate the changing prices over time.

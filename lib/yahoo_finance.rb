@@ -5,6 +5,8 @@ module YahooFinance
   class Query
     API_URL = "https://query1.finance.yahoo.com"
 
+    # I have no idea what this does, but I think it has something to do with using Redis so
+    # I'm keeping it here.
     def initialize(cache_url = nil)
       @cache_url = cache_url
     end
@@ -23,7 +25,8 @@ module YahooFinance
       http.use_ssl = true
       http.read_timeout = 10
 
-      puts uri
+      # puts uri -> was testing failed queries, kept it here as placeholder for when I want
+      # to write code on making symbols into an array. Maybe. who knows.
 
       request = Net::HTTP::Get.new(uri)
       request['User-Agent'] = "SpicyStockApp/1.0"
@@ -33,8 +36,8 @@ module YahooFinance
       if response.is_a?(Net::HTTPSuccess)
         hash_result.store(symbol, process_output(JSON.parse(response.body)))
       else
-        # Handle non-successful response
         puts "Failed to fetch data for symbol #{symbol}. HTTP Status: #{response.code}"
+        hash_result.store(symbol, "No data found")
       end
 
       hash_result
@@ -44,7 +47,14 @@ module YahooFinance
     private
 
     def process_output(json)
-      return json["chart"]["result"][0]["indicators"]["adjclose"][0]["adjclose"].sample.round(2)
+      base = json["chart"]["result"]
+      return "No data available" if base == nil
+
+      price = base[0]["indicators"]["adjclose"][0]["adjclose"]
+
+      return "Price history unavailable" if price == nil
+
+      price.sample.round(2)
     end
   end
 end
