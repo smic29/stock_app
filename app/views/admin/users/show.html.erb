@@ -9,9 +9,20 @@
     <% unless @user.confirmed? %>
     <small class="bg-danger p-1 px-2 rounded">Unverified User</small>
     <% end %>
-    <div class="form-floating my-2">
-        <input type="number" id="floatingInput" class="form-control-plaintext" readonly value="<%= @user.cash%>" >
-        <label for="floatingInput">Current funds</label>
+    <div class="d-flex">
+        <div class="form-floating my-2">
+            <input type="number" id="floatingCash" class="form-control-plaintext" readonly value="<%= @user.cash%>" >
+            <label for="floatingCash">Cash</label>
+        </div>
+
+        <div class="form-floating my-2">
+            <input type="text" id="floatingName" class="form-control-plaintext" readonly value="<%= @user.name ? @user.name : "None" %>">
+            <label for="floatingName">Display Name</label>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <%= link_to 'Edit', admin_path, class:"btn btn-sm btn-outline-secondary" %>
     </div>
 </div>
 <% end %>
