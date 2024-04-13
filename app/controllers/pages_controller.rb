@@ -6,4 +6,8 @@ class PagesController < ApplicationController
     @data = query.quote('nvda')['nvda']
     #aapl used for testing
   end
+
+  def quote
+
+  end
 end

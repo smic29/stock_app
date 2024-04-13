@@ -1,13 +1,19 @@
 <% if user_signed_in? %>
-    <br>
-    You are logged in as <%= current_user.email %>
-    <br>
-    Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
-    <br>
-    You have <%= current_user.cash %>
-    <br>
-    Testing Endpoint: <br>
-    <%= @data %>
+    <%= turbo_frame_tag "user_frame" do %>
+        <div>
+            <h3>Welcome <%= current_user.name ? current_user.name : current_user.email %></h3>
+        </div>
+        Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
+        <br>
+        You have <%= current_user.cash %>
+        <br>
+        <%= link_to 'Get a Quote', quote_path, class: "btn btn-outline-success btn-sm", data: {
+            controller: "modal",
+            action: "click->modal#open",
+            bs_toggle: "modal",
+            bs_target: "#appModal"
+        } %>
+    <% end %>
 <% else %>
     <div class="container-fluid align-center">
         <div class="border rounded p-1">

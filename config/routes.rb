@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  get 'quote' => "pages#quote"
+
   # Defines the root path route ("/")
   root "pages#home"
 end
