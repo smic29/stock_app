@@ -1,3 +1,15 @@
 <%= turbo_frame_tag "modal_frame" do %>
-You are within the modal frame boy
+    <%= form_with(url: quote_path, method: :post) do |f| %>
+    <div class="d-flex">
+        <div>
+            <%= f.text_field :symbol, placeholder: "Symbol" %>
+        </div>
+        <div>
+            <%= f.submit "Get Quote", class: "btn btn-sm btn-outline-success" %>
+        </div>
+    </div>
+    <% end %>
+    <%= turbo_frame_tag "quote_result_frame" do %>
+        Loading...
+    <% end %>
 <% end %>
