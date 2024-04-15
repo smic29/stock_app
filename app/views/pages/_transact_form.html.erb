@@ -1,5 +1,6 @@
-<%= form_with(url: transaction_index_path, method: "post") do |f| %>
+<%= form_with(url: transactions_path, method: "post") do |f| %>
     <%= f.hidden_field :symbol, value: key %>
+    <%= f.hidden_field :price, value: price %>
     Your Cash: $ <%= current_user.cash %> <br>
     Quantity:
     <%= f.number_field :quantity, max: (current_user.cash / price).floor, data: {
