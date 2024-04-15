@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   match 'quote' => "pages#quote", via: [:get, :post]
 
+  scope 'user' do
+    resources :transaction, only: [ :index, :create ]
+  end
+
   # Defines the root path route ("/")
   root "pages#home"
 end

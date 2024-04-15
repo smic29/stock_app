@@ -1,0 +1,12 @@
+<%= form_with(url: transaction_index_path, method: "post") do |f| %>
+    <%= f.hidden_field :symbol, value: key %>
+    Your Cash: $ <%= current_user.cash %> <br>
+    Quantity:
+    <%= f.number_field :quantity, max: (current_user.cash / price).floor, data: {
+        controller: "transact-input"
+    } %> <br>
+    <%= f.submit "Buy" %>
+    <% if current_user.stocks.exists?(symbol: key) %>
+    <%= f.submit "Sell" %>
+    <% end %>
+<% end %>

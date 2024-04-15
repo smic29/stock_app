@@ -1,4 +1,3 @@
 <%= turbo_stream.update("quote_result_frame") do %>
-    <% key = @data.keys.first %>
-    <%= key.upcase %>: $<%= @data[key]["price"] %>
+    <%= render partial: "pages/result", locals: { data: @data } %>
 <% end %>

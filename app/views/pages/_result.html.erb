@@ -1,0 +1,13 @@
+<div class="my-2">
+    <% key = data.keys.first %><% price = data[key]["price"] %>
+    <h4>
+        <%= key.upcase %>: 
+    </h4>
+    <div class="mb-1">
+        Current Market Price: $ <%= price %>
+    </div>
+    <br>
+    <% if current_user.approved? %>
+        <%= render partial: 'pages/transact_form', locals: { key: key, price: price} %>
+    <% end %>
+</div>
