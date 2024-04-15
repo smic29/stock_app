@@ -8,4 +8,6 @@ class User < ApplicationRecord
   scope :is_pending_approval, -> { where(approved: false, admin: false).where.not(confirmed_at:nil) }
   scope :is_a_user, -> { where(admin: false) }
 
+  has_many :stocks
+  has_many :transactions
 end
