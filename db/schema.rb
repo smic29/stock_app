@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_12_105058) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_15_102037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stocks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "symbol"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_stocks_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,4 +44,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_105058) do
     t.check_constraint "cash >= 0::numeric", name: "check_cash_non_negative"
   end
 
+  add_foreign_key "stocks", "users"
 end
