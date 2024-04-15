@@ -170,3 +170,5 @@ The url we make requests from is from Yahoo Finance, and since the gem no longer
 As to how I found the url to use, I did a project for CS50 and upon reading the provided helper code, I found the base url used to make queries. When I found the basic_yahoo_finance gem, I found that it used the same url, but it was no longer working. Also, the project I was doing under CS50, didn't really utilize JSON responses, but instead was downloading CSV files then parsing that.
 
 I'm still in the process of exploring what data I want to parse from the response, so at this time I'm only getting a `.sample` from the array returned from getting a particular time period's adjusted closing prices. I guess this is also to simulate the changing prices over time.
+#### Thoughts:
+After finishing the base code for this that works for my specific purpose, I'm contemplating if I should refactor the `lookup_symbol` method to a concern. This is because in the future, I would need to make a portfolio page and I plan to display the current prices from there. Maybe this is just a 'cross that bridge when you get there' kind-of thing.
