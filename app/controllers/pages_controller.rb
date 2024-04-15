@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!, only: [ :quote ]
+
   def home
     redirect_to admin_path if current_user&.admin
 
