@@ -7,7 +7,7 @@
         Current Market Price: $ <%= price %>
     </div>
     <br>
-    <% if current_user.approved? %>
+    <% if current_user.approved? && price != nil %>
         <%= render partial: 'pages/transact_form', locals: { key: key, price: price} %>
     <% end %>
 </div>
