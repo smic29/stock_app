@@ -10,7 +10,7 @@ A Ruby on Rails project made for Avion School
 - [x] I want to buy a stock to add to my investment (Signup should be approved)
 - [ ] I want to have a My Portfolio page to see all my stocks
 - [ ] I want to have a Transaction page to see and monitor all the transactions made by buying and selling stocks
-- [ ] I want to sell my stocks to gain money
+- [x] I want to sell my stocks to gain money
 ### Admin
 - [x] I want to create a new trader to manually add them to the app
 - [x] I want to edit a specific trader to update his/her details
