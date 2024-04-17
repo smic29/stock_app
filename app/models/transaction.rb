@@ -5,4 +5,14 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :stock
+
+  before_validation :check_user_approved
+
+  private
+
+  def check_user_approved
+    unless user.approved?
+      errors.add(:user, "Trades have not been approved yet")
+    end
+  end
 end
