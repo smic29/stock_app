@@ -193,3 +193,5 @@ $ rails g rspec:install
     - Models for scope testing
 - [Shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
   - To have cleaner one line code for validation and association testing.
+- [Faker](https://github.com/faker-ruby/faker)
+  - To generate test dynamic test data quicker
