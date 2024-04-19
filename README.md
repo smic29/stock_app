@@ -187,3 +187,7 @@ end
 $ bundle install
 $ rails g rspec:install
 ```
+### Additional gems
+- [FactoryBot](https://github.com/thoughtbot/factory_bot_rails)
+  - Used for:
+    - Models for scope testing
