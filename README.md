@@ -191,3 +191,5 @@ $ rails g rspec:install
 - [FactoryBot](https://github.com/thoughtbot/factory_bot_rails)
   - Used for:
     - Models for scope testing
+- [Shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+  - To have cleaner one line code for validation and association testing.
