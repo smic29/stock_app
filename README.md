@@ -25,6 +25,7 @@ A Ruby on Rails project made for Avion School
   - [Installation](https://www.rubydoc.info/gems/bootstrap/5.3.2)
 - Rspec 
   - [Installation](https://rubygems.org/gems/rspec)
+  - [Documentation](https://github.com/rspec/rspec-rails) -- Followed this one for setting up
 - Font Awesome
   - [Installation](https://docs.fontawesome.com/web/use-with/ruby-on-rails#add-those-icons)
 
