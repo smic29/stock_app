@@ -173,3 +173,17 @@ As to how I found the url to use, I did a project for CS50 and upon reading the 
 I'm still in the process of exploring what data I want to parse from the response, so at this time I'm only getting a `.sample` from the array returned from getting a particular time period's adjusted closing prices. I guess this is also to simulate the changing prices over time.
 #### Thoughts:
 After finishing the base code for this that works for my specific purpose, I'm contemplating if I should refactor the `lookup_symbol` method to a concern. This is because in the future, I would need to make a portfolio page and I plan to display the current prices from there. Maybe this is just a 'cross that bridge when you get there' kind-of thing.
+
+## Tests
+### Setting up Test Suite
+For this project, we were required to use `rspec`. I followed the documentation for installation and setup:
+```ruby
+# I added rspec-rails to my gemfile:
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1.0'
+end
+
+# Then ran the following console commands to complete the installation:
+$ bundle install
+$ rails g rspec:install
+```
