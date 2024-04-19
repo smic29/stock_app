@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "admin_dash" do %>
+    <h3>Recent App Transactions</h3>
+    <%= link_to 'Back', admin_path %>
+
+    <% @transactions.each do |transaction| %>
+    <div class="d-flex justify-content-between border rounded p-2 align-items-center my-1">
+        <span><%= transaction.user.email %></span>
+        <span><%= transaction.type %></span>
+        <span><%= transaction.quantity %></span>
+        <span><%= transaction.price %></span>
+        <span><%= transaction.stock.symbol %></span>
+        <small><%= transaction.created_at.strftime("%m/%d/%y %I:%M %p") %></small>
+    </div>
+    <% end %>
+
+<% end %>

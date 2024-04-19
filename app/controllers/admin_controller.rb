@@ -26,6 +26,10 @@ class AdminController < ApplicationController
     end
   end
 
+  def transactions
+    @transactions = Transaction.all.order(created_at: :desc)
+  end
+
   private
 
   def set_user
