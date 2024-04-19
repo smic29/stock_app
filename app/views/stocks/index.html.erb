@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "user_frame" do %>
+    <h1>Portfolio</h1>
+
+    <div class="d-flex flex-column text-center">
+        <% @stocks.each do |stock| %>
+            <div>
+                <%= stock.symbol %>
+                <%= stock.quantity %>
+                Average Price: $ <%= average_buy_price(stock) %>
+            </div>
+        <% end %>
+    </div>
+
+    <%= link_to 'Back', root_path %>
+<% end %>

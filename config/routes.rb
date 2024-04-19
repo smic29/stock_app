@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   scope 'user' do
     resources :transactions, only: [ :index, :create ]
+    resources :stocks, only: [ :index ]
   end
 
   # Defines the root path route ("/")

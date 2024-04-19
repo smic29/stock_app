@@ -8,7 +8,7 @@ A Ruby on Rails project made for Avion School
 - [x] I want to receive an email to confirm my pending Account signup
 - [x] I want to receive an approval Trader Account email to notify me once my account has been approved
 - [x] I want to buy a stock to add to my investment (Signup should be approved)
-- [ ] I want to have a My Portfolio page to see all my stocks
+- [x] I want to have a My Portfolio page to see all my stocks
 - [x] I want to have a Transaction page to see and monitor all the transactions made by buying and selling stocks
 - [x] I want to sell my stocks to gain money
 ### Admin
