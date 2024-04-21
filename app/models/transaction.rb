@@ -7,6 +7,9 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :stock
 
+  validate :check_cash_balance, if: :buy_transaction?
+  validate :check_stock_quantity, if: :sell_transaction?
+
   def self.transact(user, commit, transaction_params)
     ActiveRecord::Base.transaction do
       # Prepare parameters for transaction create
@@ -35,4 +38,25 @@ class Transaction < ApplicationRecord
       return true
     end
   end
+
+  private
+
+  def buy_transaction?
+    type == 'Buy'
+  end
+
+  def sell_transaction?
+    type == 'Sell'
+  end
+
+  def check_cash_balance
+    total_cost = quantity.to_i * price.to_f
+    errors.add(:base, 'Insufficient cash balance for this transaction') unless user.cash >= total_cost
+  end
+
+  def check_stock_quantity
+    return if stock.nil?
+    errors.add(:base, 'Cannot sell more stocks than currently owned') if quantity > stock.quantity
+  end
+
 end
