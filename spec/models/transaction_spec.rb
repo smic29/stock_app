@@ -6,6 +6,9 @@ RSpec.describe Transaction, type: :model do
     let(:user) { create(:user, cash: 1000) }
     let(:stock) { create(:stock, user: user, quantity: 10) }
 
+    it { should validate_inclusion_of(:type).in_array(['Buy', 'Sell']).with_message(/is not a valid transaction type/) }
+    it { should validate_numericality_of(:price).is_greater_than(0) }
+
     context 'when user has enough cash for a buy transaction' do
       it 'is valid' do
         transaction = build(:transaction, user: user, stock: stock, type: 'Buy', quantity: 5, price: 10)
@@ -23,7 +26,7 @@ RSpec.describe Transaction, type: :model do
 
     context 'when user attempts to sell more stocks than currently owned' do
       it 'is not valid' do
-        transaction = build(:transaction, user: user, stock: stock, type: 'Sell', quantity: 15)
+        transaction = build(:transaction, user: user, stock: stock, type: 'Sell', quantity: 15, price: 10)
         expect(transaction).not_to be_valid
         expect(transaction.errors[:base]).to include('Cannot sell more stocks than currently owned')
       end
@@ -31,7 +34,7 @@ RSpec.describe Transaction, type: :model do
 
     context 'when user attempts to sell stocks within the current quantity' do
       it 'is valid' do
-        transaction = build(:transaction, user: user, stock: stock, type: 'Sell', quantity: 5)
+        transaction = build(:transaction, user: user, stock: stock, type: 'Sell', quantity: 5, price: 10)
         expect(transaction).to be_valid
       end
     end

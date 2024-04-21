@@ -7,6 +7,8 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :stock
 
+  validates :type, inclusion: { in: %w(Buy Sell), message: "%{value} is not a valid transaction type" }
+  validates :price, numericality: { greater_than: 0 }
   validate :check_cash_balance, if: :buy_transaction?
   validate :check_stock_quantity, if: :sell_transaction?
 
@@ -50,6 +52,8 @@ class Transaction < ApplicationRecord
   end
 
   def check_cash_balance
+    return if user.nil? || quantity.nil? || price.nil?
+
     total_cost = quantity.to_i * price.to_f
     errors.add(:base, 'Insufficient cash balance for this transaction') unless user.cash >= total_cost
   end
