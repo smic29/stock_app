@@ -32,10 +32,12 @@ class Transaction < ApplicationRecord
       transaction.save!
 
       # Update the stock
-      commit == 'Buy' ? stock.increment!(:quantity, create_params[:quantity].to_i) : stock.decrement!(:quantity, create_params[:quantity].to_i)
+      operation = commit == 'Buy' ? :increment! : :decrement!
+      stock.send(operation, :quantity, create_params[:quantity].to_i)
 
       # Updating user's cash
-      commit == 'Buy' ? user.update!(cash: cash - total) : user.update!(cash: cash + total)
+      updated_cash = commit == 'Buy' ? cash - total : cash + total
+      user.update!(cash: updated_cash)
 
       return true
     end
