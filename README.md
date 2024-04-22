@@ -195,3 +195,10 @@ $ rails g rspec:install
   - To have cleaner one line code for validation and association testing.
 - [Faker](https://github.com/faker-ruby/faker)
   - To generate test dynamic test data quicker
+
+### Tests included
+- [x] Models
+  - Validations, scopes, associations, and custom methods.
+- [ ] Controllers
+- [ ] Views
+- [x] Custom Endpoint Query
