@@ -22,6 +22,8 @@ module YahooFinance
       start_ts = start_time.to_i
 
       symbols.each do |sym|
+        next if sym.nil?
+
         uri = URI("#{API_URL}/v7/finance/chart/#{sym}?period1=#{start_ts}&period2=#{end_ts}&interval=1d&events=history&includeAdjustedClose=true")
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
@@ -34,7 +36,6 @@ module YahooFinance
 
         if response.is_a?(Net::HTTPSuccess)
           hash_result.store(sym, process_output(JSON.parse(response.body)))
-          puts uri
         else
           puts "Failed to fetch data for symbol #{sym}. HTTP Status: #{response.code}"
           hash_result.store(sym, "No data found")
@@ -52,11 +53,12 @@ module YahooFinance
       base = json["chart"]["result"]
       return "No data available" if base == nil
 
-      price = base[0]["indicators"]["adjclose"][0]["adjclose"]
+      prices = base[0]["indicators"]["adjclose"][0]["adjclose"]
 
-      return "Price history unavailable" if price == nil
+      return "Price history unavailable" if prices == nil
 
-      result["price"] = price.sample.round(2)
+      result["prices"] = prices.map { |price| price.round(2) } # sample.round(2)
+      result["price"] = prices.sample.round(2)
       result
     end
 
