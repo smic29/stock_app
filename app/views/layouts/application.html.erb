@@ -15,8 +15,6 @@
     You are viewing as a user.
     </small>
     <% if user_signed_in? %>
-      <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,
-      class: "position-absolute top-0 end-0 btn btn-outline-danger btn-sm" %>
       <main class="align-self-start mt-5 container-fluid p-1">
         <%= yield %>
       </main>

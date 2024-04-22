@@ -11,5 +11,22 @@
             <i class="fa-solid fa-briefcase fa-xl"></i>
         </a>
     </div>
+    <div class="position-absolute end-0 me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+        <i class="fa-solid fa-grip-lines fa-rotate-180 fa-xl"></i>
+    </div>
   </div>
 </nav>
+
+<div class="offcanvas offcanvas-end" id="offcanvas">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">User Controls</h5>
+        <button class="btn-close" data-bs-dismiss="offcanvas" type="button"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit iusto quaerat minus magnam a vel, eveniet, soluta corporis dolores atque, voluptates nesciunt voluptate. Minima assumenda soluta dolorum fugit ipsum explicabo commodi magnam in eius. Tempore expedita possimus necessitatibus velit quod quo odit, provident perspiciatis itaque ullam sequi consequatur ex, porro excepturi perferendis molestias unde voluptatibus veritatis, distinctio facilis tempora. Ipsum tempora nisi magnam assumenda praesentium eveniet delectus harum voluptates vero molestiae, necessitatibus nobis hic maiores, dolorem non est quis! Excepturi, odio libero illum, dolorum magni voluptatem ab, incidunt est ipsa molestias minima laboriosam consequuntur vitae odit deleniti. Dolorum, corporis vero.
+    </div>
+
+    <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,
+    class: "position-absolute bottom-0 start-50 translate-middle btn btn-danger w-100" %>
+</div>
