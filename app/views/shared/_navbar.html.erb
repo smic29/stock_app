@@ -1,13 +1,13 @@
 <nav class="navbar fixed-bottom bg-body-tertiary">
   <div class="container-fluid">
-    <div class="d-flex mx-auto gap-5 py-2">
+    <div class="d-flex mx-auto gap-5 py-2" data-controller="navbar">
         <a href="<%= root_path %>" data-turbo-frame="user_frame" class="dash-link active">
             <i class="fa-solid fa-house fa-xl"></i>
         </a>
-        <a href="<%= transactions_path %>" data-turbo-frame="user_frame">
+        <a href="<%= transactions_path %>" data-turbo-frame="user_frame" class="dash-link">
             <i class="fa-solid fa-file-invoice-dollar fa-xl"></i>
         </a>
-        <a href="<%= stocks_path %>" data-turbo-frame="user_frame">
+        <a href="<%= stocks_path %>" data-turbo-frame="user_frame" class="dash-link">
             <i class="fa-solid fa-briefcase fa-xl"></i>
         </a>
     </div>
