@@ -2,6 +2,36 @@ require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
 
+  describe 'Concerns' do
+    let(:user) { create(:user) }
+    let(:unapproved_user) { create(:user, approved: false) }
+    let(:stock) { create(:stock, user: user) }
+    let(:transaction) { build(:transaction, user: user, stock: stock, type: 'Buy', price: 10) }
+    let(:invalid_transaction) { build(:transaction, user: unapproved_user, stock: stock, type: 'Buy', price: 10) }
+
+    context 'when the user is approved' do
+      it 'is valid' do
+        expect(transaction).to be_valid
+      end
+    end
+
+    context 'when the user is not approved' do
+      it 'is not valid' do
+        expect(invalid_transaction).not_to be_valid
+        expect(invalid_transaction.errors[:user]).to include("Trades have not been approved yet")
+      end
+    end
+
+    context 'when no user is provided' do
+      let(:transaction) { build(:transaction, user: nil) }
+
+      it 'is not valid' do
+        expect(transaction).not_to be_valid
+        expect(transaction.errors[:user]).to include("must exist")
+      end
+    end
+  end
+
   describe 'Validations' do
     let(:user) { create(:user, cash: 1000) }
     let(:stock) { create(:stock, user: user, quantity: 10) }
