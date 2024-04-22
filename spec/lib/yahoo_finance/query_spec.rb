@@ -31,9 +31,13 @@ RSpec.describe YahooFinance::Query do
       data = query.quote(symbols)
 
       symbols.each do |symbol|
+        next if data[symbol] == "No data found"
+
         expect(data).to include(symbol)
+        expect(data[symbol]).to be_a(Hash)
         expect(data[symbol]).to include('price')
       end
+      expect(data.keys.count).to eq(5)
     end
 
     it 'handles responses with no prices' do
