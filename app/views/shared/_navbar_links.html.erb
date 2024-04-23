@@ -1,0 +1,24 @@
+<% if current_user.admin? %>
+    <a href="<%= admin_path %>" data-turbo-frame="admin_dash" class="dash-link active">
+        <i class="fa-solid fa-house fa-xl"></i>
+    </a>
+    <a href="<%= admin_users_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-users fa-xl"></i>
+    </a>
+    <a href="<%= pending_approval_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-person-circle-exclamation fa-xl"></i>
+    </a>
+    <a href="<%= admin_transactions_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-receipt fa-xl"></i>
+    </a>
+<% else %>
+    <a href="<%= root_path %>" data-turbo-frame="user_frame" class="dash-link active">
+        <i class="fa-solid fa-house fa-xl"></i>
+    </a>
+    <a href="<%= transactions_path %>" data-turbo-frame="user_frame" class="dash-link">
+        <i class="fa-solid fa-file-invoice-dollar fa-xl"></i>
+    </a>
+    <a href="<%= stocks_path %>" data-turbo-frame="user_frame" class="dash-link">
+        <i class="fa-solid fa-briefcase fa-xl"></i>
+    </a>
+<% end %>

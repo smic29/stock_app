@@ -6,7 +6,7 @@ export default class extends Controller {
     document.addEventListener('turbo:before-frame-render',(e) => {
       const turboFrame = e.target
 
-      if (turboFrame.id !== "user_frame") {
+      if (turboFrame.id !== "user_frame" && turboFrame.id !== "admin_dash") {
         return
       }
       const links = this.element.querySelectorAll('a')

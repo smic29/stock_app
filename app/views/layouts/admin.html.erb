@@ -14,11 +14,10 @@
     <small class="bg-dark text-white position-fixed top-0 px-2 border rounded">
     You are viewing as an Admin.
     </small>
-    <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,
-    class: "position-absolute top-0 end-0 btn btn-outline-danger btn-sm" %>
     <main class="align-self-start mt-5 container-fluid p-1">
       <%= yield %>
     </main>
     <%= render 'shared/modal' %>
+    <%= render 'shared/navbar' %>
   </body>
 </html>
