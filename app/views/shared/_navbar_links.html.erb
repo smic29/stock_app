@@ -5,8 +5,13 @@
     <a href="<%= admin_users_path %>" data-turbo-frame="admin_dash" class="dash-link">
         <i class="fa-solid fa-users fa-xl"></i>
     </a>
-    <a href="<%= pending_approval_path %>" data-turbo-frame="admin_dash" class="dash-link">
-        <i class="fa-solid fa-person-circle-exclamation fa-xl"></i>
+    <a href="<%= pending_approval_path %>" data-turbo-frame="admin_dash" 
+    class="dash-link <%= pending_users? ? "" : "disabled"%>">
+        <% if pending_users? %>
+            <i class="fa-solid fa-person-circle-exclamation fa-xl"></i>
+        <% else %>
+            <i class="fa-solid fa-person fa-xl"></i>
+        <% end %>
     </a>
     <a href="<%= admin_transactions_path %>" data-turbo-frame="admin_dash" class="dash-link">
         <i class="fa-solid fa-receipt fa-xl"></i>
