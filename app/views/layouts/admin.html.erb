@@ -11,13 +11,12 @@
   </head>
 
   <body>
-    <small class="bg-dark text-white position-fixed top-0 px-2 border rounded">
-    You are viewing as an Admin.
-    </small>
-    <main class="align-self-start mt-5 container-fluid p-1">
+    <main class="p-1 vh-100">
       <%= yield %>
     </main>
-    <%= render 'shared/modal' %>
-    <%= render 'shared/navbar' %>
+    <aside>
+      <%= render 'shared/modal' %>
+      <%= render 'shared/navbar' %>
+    </aside>
   </body>
 </html>

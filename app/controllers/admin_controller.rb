@@ -5,10 +5,10 @@ class AdminController < ApplicationController
   before_action :set_user, only: [:approve]
 
   def home
-    @user_count = User.is_a_user.count
-    @trader_request_count = User.is_pending_approval.count
-    @verified_traders_count = User.is_verified_trader.count
-
+    # @user_count = User.is_a_user.count => Turned into a helper
+    # @trader_request_count = User.is_pending_approval.count
+    # @verified_traders_count = User.is_verified_trader.count
+    @transactions = Transaction.all.order(created_at: :desc).limit(5)
   end
 
   def pending
