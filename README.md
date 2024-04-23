@@ -174,6 +174,63 @@ I'm still in the process of exploring what data I want to parse from the respons
 #### Thoughts:
 After finishing the base code for this that works for my specific purpose, I'm contemplating if I should refactor the `lookup_symbol` method to a concern. This is because in the future, I would need to make a portfolio page and I plan to display the current prices from there. Maybe this is just a 'cross that bridge when you get there' kind-of thing.
 
+### Using Helpers for NavBar
+#### Resources:
+- [Ruby Guides: Rails Helpers](https://www.rubyguides.com/2020/01/rails-helpers/)
+#### Process:
+I was looking at that anchor tags I created initially with the navigation bar feature I added and thought, it would be nice to refactor this code to look better. Since they looked like this:
+```ruby
+<% if current_user.admin? %>
+    <a href="<%= admin_path %>" data-turbo-frame="admin_dash" class="dash-link active">
+        <i class="fa-solid fa-house fa-xl"></i>
+    </a>
+    <a href="<%= admin_users_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-users fa-xl"></i>
+    </a>
+    <a href="<%= pending_approval_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-person-circle-exclamation fa-xl"></i>
+    </a>
+    <a href="<%= admin_transactions_path %>" data-turbo-frame="admin_dash" class="dash-link">
+        <i class="fa-solid fa-receipt fa-xl"></i>
+    </a>
+<% else %>
+    <a href="<%= root_path %>" data-turbo-frame="user_frame" class="dash-link active">
+        <i class="fa-solid fa-house fa-xl"></i>
+    </a>
+    <a href="<%= transactions_path %>" data-turbo-frame="user_frame" class="dash-link">
+        <i class="fa-solid fa-file-invoice-dollar fa-xl"></i>
+    </a>
+    <a href="<%= stocks_path %>" data-turbo-frame="user_frame" class="dash-link">
+        <i class="fa-solid fa-briefcase fa-xl"></i>
+    </a>
+<% end %>
+```
+It didn't really look nice to look at and when I wanted to change the icon, I'd have to find the right icon with the right class to replace. This was when I thought of a usage of helpers I've seen in an article. Since helpers are methods that are supposed to be used in the view, I had the idea of making a method that would take in certain parameters and generate the html tag for me.
+
+Playing around with the code for some time, I came up with this:
+```ruby
+def nav_link(path, frame, icon, active = false)
+  link_to path, data: { turbo_frame: frame }, class: "dash-link #{active ? 'active' : ''}" do
+    content_tag(:i, '', class: "fa-solid fa-xl #{icon}")
+  end
+end
+```
+Basically, with the embedded ruby, I'd return a anchor tag containing an icon tag. Then both of these tags would utilize the paramaters I've set and would return the html. After the changes, the code now looks like:
+```ruby
+<% if current_user.admin? %>
+    <%= nav_link admin_path, "admin_dash", "fa-house", true %>
+    <%= nav_link admin_users_path, "admin_dash", "fa-users" %>
+    <%= pending_users_link %>
+    <%= nav_link admin_transactions_path, "admin_dash", "fa-receipt" %>
+<% else %>
+    <%= nav_link root_path, "user_frame", "fa-house", true %>
+    <%= nav_link transactions_path, "user_frame", "fa-file-invoice-dollar" %>
+    <%= nav_link stocks_path, "user_frame", "fa-briefcase" %>
+<% end %>
+```
+
+Which is now much cleaner than the previous one. For `pending_users_link`, I had more conditional checks implemented and I haven't thought of a way to integrate it with `nav_link`.
+
 ## Tests
 ### Setting up Test Suite
 For this project, we were required to use `rspec`. I followed the documentation for installation and setup:
