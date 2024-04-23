@@ -2,21 +2,33 @@
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.dash-link.active i {
-    transform: translateY(-3px); /* Raise the icon */
-    text-decoration: none; /* Add underline */
-    color: black;
+.dash-link.active {
+    i {
+        transform: translateY(-3px); /* Raise the icon */
+        text-decoration: none; /* Add underline */
+        color: black;
+        
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: black; /* Color of the underline */
+            transition: bottom 0.3s ease-in-out;
+        }
+    }
+
 }
 
-.dash-link.active i::after {
-    content: "";
-    position: absolute;
-    bottom: -17px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: black; /* Color of the underline */
-    transition: bottom 0.3s ease-in-out;
+.dash-link.disabled {
+    i {
+        text-decoration: none;
+        color: darkgray;
+    }
+    
+    pointer-events: none;
 }
 
 $offcanvas-horizontal-width: 325px;
