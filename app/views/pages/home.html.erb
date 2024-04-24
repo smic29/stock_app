@@ -19,8 +19,8 @@
         <%= link_to 'Stocks', stocks_path %>
     <% end %>
 <% else %>
-    <div class="container-fluid align-center">
-        <div class="border rounded p-1">
+    <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+        <div class="border border-2 border-primary-subtle rounded p-1 shadow-lg">
             <%= render 'shared/loginorsignup' %>
             <%= turbo_frame_tag "login_signup_frame", src: new_user_session_path, target: :_top do %>
             PLACEHOLDER, MAYBE A LOADING SCREEN

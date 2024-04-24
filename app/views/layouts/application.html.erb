@@ -11,17 +11,16 @@
   </head>
 
   <body>
-    <small class="bg-warning position-absolute top-0 px-2 border rounded">
-    You are viewing as a user.
-    </small>
     <% if user_signed_in? %>
-      <main class="align-self-start mt-5 container-fluid p-1">
+      <main class="p-1 vh-100">
         <%= yield %>
       </main>
-      <%= render 'shared/modal' %>
-      <%= render 'shared/navbar' %>
+      <aside>
+        <%= render 'shared/modal' %>
+        <%= render 'shared/navbar' %>
+      </aside>
     <% else %>
-      <main>
+      <main class="p-1 vh-100">
         <%= yield %>
       </main>
     <% end %>
