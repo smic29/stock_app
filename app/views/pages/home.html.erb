@@ -1,23 +1,9 @@
 <% if user_signed_in? %>
-    <%= turbo_frame_tag "user_frame" do %>
-        <div>
-            <h3>Welcome <%= current_user.name ? current_user.name : current_user.email %></h3>
-        </div>
-        Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
-        <br>
-        You have <%= current_user.cash %>
-        <br>
-        <%= link_to 'Get a Quote', quote_path, class: "btn btn-outline-success btn-sm", data: {
-            controller: "modal",
-            action: "click->modal#open",
-            bs_toggle: "modal",
-            bs_target: "#appModal"
-        } %>
-        <br>
-        <%= link_to 'Transactions', transactions_path %>
-        <br>
-        <%= link_to 'Stocks', stocks_path %>
-    <% end %>
+    <div>
+        <%= turbo_frame_tag "user_frame" do %>
+            <%= render 'pages/user_dashboard' %>
+        <% end %>
+    </div>
 <% else %>
     <div class="container-fluid d-flex align-items-center justify-content-center h-100">
         <div class="border border-2 border-primary-subtle rounded p-1 shadow-lg">

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row bg-body-tertiary pb-4 rounded-bottom-5 shadow-sm">
+        <div class="row">
+            <div class="mt-5">
+                <div class="col-12" id="user_greeting">
+                    <h2 class="ms-3">Welcome <%= current_user.name ? current_user.name : current_user.email %>!</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
+                <h3 class="fw-bold font-monospace mb-0 lh-1">
+                    <span class="text-success">$</span> 
+                    <span class=""><%= format('%.2f', current_user.cash) %></span>
+                </h3>
+                <small class="fw-lighter">Balance Remaining</small>
+            </div>
+            <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
+                <h3 class="fw-bold font-monospace mb-0 lh-1">
+                    <span class="text-success">$</span> 
+                    <span class=""><%= format('%.2f', get_portfolio_value) %></span>
+                </h3>
+                <small class="fw-lighter">Portfolio Value</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div>
+    <h3>Welcome <%= current_user.name ? current_user.name : current_user.email %></h3>
+</div>
+Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
+<br>
+You have <%= current_user.cash %>
+<br>
+<%= link_to 'Get a Quote', quote_path, class: "btn btn-outline-success btn-sm", data: {
+    controller: "modal",
+    action: "click->modal#open",
+    bs_toggle: "modal",
+    bs_target: "#appModal"
+} %>
+<br>
+<%= link_to 'Transactions', transactions_path %>
+<br>
+<%= link_to 'Stocks', stocks_path %>

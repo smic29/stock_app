@@ -9,7 +9,7 @@
         Quantity:
         <%= f.number_field :quantity, max: (current_user.cash / price).floor, data: {
             controller: "transact-input"
-        } %> <br>
+        }, required: true %> <br>
         <%= f.submit "Buy" %>
         <% if current_user.stocks.exists?(symbol: key.upcase) %>
         <%= f.submit "Sell" %>
