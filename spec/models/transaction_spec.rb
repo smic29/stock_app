@@ -6,7 +6,7 @@ RSpec.describe Transaction, type: :model do
     let(:user) { create(:user) }
     let(:unapproved_user) { create(:user, approved: false) }
     let(:stock) { create(:stock, user: user) }
-    let(:transaction) { build(:transaction, user: user, stock: stock, type: 'Buy', price: 10) }
+    let(:transaction) { build(:transaction, user: user, stock: stock, type: 'Buy', price: 10, quantity: 1) }
     let(:invalid_transaction) { build(:transaction, user: unapproved_user, stock: stock, type: 'Buy', price: 10) }
 
     context 'when the user is approved' do
@@ -38,6 +38,7 @@ RSpec.describe Transaction, type: :model do
 
     it { should validate_inclusion_of(:type).in_array(['Buy', 'Sell']).with_message(/is not a valid transaction type/) }
     it { should validate_numericality_of(:price).is_greater_than(0) }
+    it { should validate_numericality_of(:quantity).is_greater_than(0) }
 
     context 'when user has enough cash for a buy transaction' do
       it 'is valid' do

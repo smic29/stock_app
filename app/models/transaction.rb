@@ -9,6 +9,7 @@ class Transaction < ApplicationRecord
 
   validates :type, inclusion: { in: %w(Buy Sell), message: "%{value} is not a valid transaction type" }
   validates :price, numericality: { greater_than: 0 }
+  validates :quantity, numericality: { greater_than: 0 }
   validate :check_cash_balance, if: :buy_transaction?
   validate :check_stock_quantity, if: :sell_transaction?
 
