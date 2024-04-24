@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-auto">
             <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
                 <h3 class="fw-bold font-monospace mb-0 lh-1">
                     <span class="text-success">$</span> 
@@ -16,24 +16,32 @@
                 <small class="fw-lighter">Balance Remaining</small>
             </div>
             <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
-                <h3 class="fw-bold font-monospace mb-0 lh-1">
-                    <span class="text-success">$</span> 
-                    <span class=""><%= format('%.2f', get_portfolio_value) %></span>
-                </h3>
+                <div class="d-flex align-items-center">
+                    <h3 class="fw-bold font-monospace mb-0 lh-1 
+                    <%= is_gain? ? 'text-success' : 'text-danger' %>">
+                        <span class="">$</span> 
+                        <span class=""><%= format('%.2f', get_market_value) %></span>
+                    </h3>
+                    <div class="ms-1">
+                        <% if is_gain? %>
+                        <small class="text-success"><i class="fa-solid fa-arrow-up fa-sm"></i></small>
+                        <% else %>
+                        <small class="text-danger"><i class="fa-solid fa-arrow-down fa-sm"></i></small>
+                        <% end %>
+                    </div>
+                </div>
                 <small class="fw-lighter">Portfolio Value</small>
+            </div>
+        </div>
+        <div class="row mt-3 mx-auto">
+            <div class="col-12 text-center">
+                <%= render 'pages/progress_bar' %>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
+<%# This is being kept right now just for reference %>
 <div>
     <h3>Welcome <%= current_user.name ? current_user.name : current_user.email %></h3>
 </div>
