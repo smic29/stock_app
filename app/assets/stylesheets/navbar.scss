@@ -1,7 +1,10 @@
-.dash-link i {
+.dash-link {
+    i {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
+    }
 
+    color: $earth;
+}
 .dash-link.active {
     i {
         transform: translateY(-3px); /* Raise the icon */

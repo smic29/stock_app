@@ -3,3 +3,13 @@ body, html {
     padding: 0;
     box-sizing: border-box;
 }
+
+$dark-blue: #31708e;
+$gray-blue: #5085A5;
+$light-blue: #8fc1e3;
+$earth: #687864;
+$air: #f7f9fb;
+
+.bgc-light-blue {
+    background-color: $light-blue;
+}
