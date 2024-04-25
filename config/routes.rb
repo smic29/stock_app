@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   match 'quote' => "pages#quote", via: [:get, :post]
 
   scope 'user' do
+    get "dashboard" => "pages#dashboard", as: :user_dashboard
     resources :transactions, only: [ :index, :create ]
     resources :stocks, only: [ :index ]
   end

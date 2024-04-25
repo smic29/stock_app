@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "user_frame" do %>
 <div class="container-fluid">
     <div class="row bg-body-tertiary pb-4 rounded-bottom-5 shadow-sm">
         <div class="row">
@@ -59,3 +60,6 @@ You have <%= current_user.cash %>
 <%= link_to 'Transactions', transactions_path %>
 <br>
 <%= link_to 'Stocks', stocks_path %>
+<%# This is the end of the reference file %>
+
+<% end %>

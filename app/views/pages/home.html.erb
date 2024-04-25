@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
     <div>
-        <%= turbo_frame_tag "user_frame" do %>
-            <%= render 'pages/user_dashboard' %>
+        <%= turbo_frame_tag "user_frame", src: user_dashboard_path do %>
+            <% render 'shared/loader' %>
         <% end %>
     </div>
 <% else %>
@@ -9,7 +9,7 @@
         <div class="border border-2 border-primary-subtle rounded p-1 shadow-lg">
             <%= render 'shared/loginorsignup' %>
             <%= turbo_frame_tag "login_signup_frame", src: new_user_session_path, target: :_top do %>
-            PLACEHOLDER, MAYBE A LOADING SCREEN
+                <%= render 'shared/loader' %>
             <% end %>
         </div>
     </div>

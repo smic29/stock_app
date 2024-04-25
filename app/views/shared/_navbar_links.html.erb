@@ -4,7 +4,7 @@
     <%= pending_users_link %>
     <%= nav_link admin_transactions_path, "admin_dash", "fa-receipt" %>
 <% else %>
-    <%= nav_link root_path, "user_frame", "fa-house", true %>
+    <%= nav_link user_dashboard_path, "user_frame", "fa-house", true %>
     <%= nav_link transactions_path, "user_frame", "fa-file-invoice-dollar" %>
     <%= nav_link stocks_path, "user_frame", "fa-briefcase" %>
 <% end %>
