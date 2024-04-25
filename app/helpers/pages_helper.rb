@@ -23,6 +23,8 @@ module PagesHelper
       sell_transactions = current_user.transactions.where(type: 'Sell').sum(:price)
 
       net_transaction_value = buy_transactions - sell_transactions
+
+      net_transaction_value
     end
   end
 
