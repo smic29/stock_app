@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   scope 'user' do
     get "dashboard" => "pages#dashboard", as: :user_dashboard
+    get "chart_data" => "pages#chart_data"
     resources :transactions, only: [ :index, :create ]
     resources :stocks, only: [ :index ]
   end
