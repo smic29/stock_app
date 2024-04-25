@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def nav_link(path, frame, icon, active = false)
-    link_to path, data: { turbo_frame: frame }, class: "dash-link #{active ? 'active' : ''}" do
+    link_to path, data: { turbo_frame: frame }, class: "txtc-earth dash-link #{active ? 'active' : ''}" do
       content_tag(:i, '', class: "fa-solid fa-xl #{icon}")
     end
   end

@@ -1,0 +1,26 @@
+$colors: (
+    dark-blue: #31708e,
+    gray-blue: #5085A5,
+    light-blue: #8fc1e3,
+    earth: #687864,
+    air: #f7f9fb
+);
+
+@mixin bgc {
+    @each $color-name, $color-value in $colors {
+      .bgc-#{$color-name} {
+        background-color: $color-value;
+      }
+    }
+}
+
+@mixin txtc {
+    @each $color-name, $color-value in $colors {
+        .txtc-#{$color-name} {
+          color: $color-value;
+        }
+      }
+}
+  
+@include bgc;
+@include txtc;
