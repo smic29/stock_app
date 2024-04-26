@@ -248,6 +248,178 @@ Basically, with the embedded ruby, I'd return a anchor tag containing an icon ta
 
 Which is now much cleaner than the previous one. For `pending_users_link`, I had more conditional checks implemented and I haven't thought of a way to integrate it with `nav_link`.
 
+### Implementing charts
+#### Resources:
+- [Chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html)
+#### Process:
+##### Setup:
+Following the documentation, I chose to use CDN by adding:
+```html
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+```
+To my `application.html.erb` under `app/views/layouts`
+##### Application:
+I chose the route of using stimulus controllers. I added an AJAX request function to the `<canvas>` tag when it connects to the DOM:
+```js
+// The function fires when the element with data-controller="table_chart" is connected to the DOM
+connect() {
+  this.fetchDataAndTurboStream();
+}
+```
+Just for some added context, this function will make a call to the `pages#get_chart` action in my pages controller:
+```ruby
+def chart_data
+  transactions = current_user.transactions.where("created_at >= ?", 7.days.ago)
+
+  # Group transactions by day
+  grouped_transactions = transactions.group_by { |transaction| transaction.created_at.to_date }
+
+  labels = []
+  buy_data = []
+  sell_data = []
+  @data = {
+    today: { buy: 0, sell: 0, count: 0 },
+    yesterday: { buy: 0, sell: 0, count: 0 },
+    week: { buy: 0, sell: 0, count: 0 }
+  }
+
+  # Iterate over each day and count the number of buy and sell transactions
+  grouped_transactions.each do |date, transactions|
+    labels << date.strftime("%m-%d")
+
+    buy_count = 0
+    sell_count = 0
+    buy_price = 0
+    sell_price = 0
+
+    transactions.each do |transaction|
+      if transaction.type == 'Buy'
+        buy_count += 1
+        buy_price += transaction.price.to_f
+      else
+        sell_count += 1
+        sell_price += transaction.price.to_f
+      end
+    end
+
+    buy_data << buy_count
+    sell_data << sell_count
+
+    if date == Date.today
+      @data[:today][:buy] = buy_price
+      @data[:today][:sell] = sell_price
+      @data[:today][:count] = buy_count + sell_count
+    elsif date == Date.today - 1
+      @data[:yesterday][:buy] = buy_price
+      @data[:yesterday][:sell] = sell_price
+      @data[:yesterday][:count] = buy_count + sell_count
+    end
+
+    if date >= Date.today - 7
+      @data[:week][:buy] += buy_price
+      @data[:week][:sell] += sell_price
+      @data[:week][:count] += buy_count + sell_count
+    end
+  end
+
+  respond_to do |format|
+    format.json { render json: { labels: labels, buy_data: buy_data, sell_data: sell_data } }
+    format.turbo_stream {
+      render turbo_stream: [
+        turbo_stream.update("user_transactions_table", partial: "pages/dashboard/transaction/table", locals: { data: @data })
+      ] }
+  end
+
+end
+```
+The action also responds to both json and turbo stream requests. The reason for this is because I have a table on the same page which would display (in essence) the same data as the chart. So I thought, why not just put it in the same controller. This is why the function fired on connect is named `fetchDataAndTurboStream`:
+```js
+fetchDataAndTurboStream() {
+  fetch('/user/chart_data')
+    .then(response => response.json())
+    .then(data => {
+      this.renderChart(data)
+      this.fetchTurboStream();
+    })
+    .catch(error => console.error("Error fetching data:", error))
+}
+
+// This function took some time to research and prompt AI about, but this was what worked for the turbo-stream
+fetchTurboStream() {
+  fetch('/user/chart_data', { headers: { Accept: 'text/vnd.turbo-stream.html'} })
+    .then(response => response.text())
+    .then(html => {
+      const turboStreamElement = document.createElement('template')
+      turboStreamElement.innerHTML = html;
+      const turboStreamContent = turboStreamElement.content.firstElementChild
+      document.body.appendChild(turboStreamContent)
+    })
+    .catch(error => console.error("Error fetching Turbo Stream:", error))
+}
+
+// Still trying to study this whole thing via the documentation provided in chart.js, I basically just copy-pasted an example and worked my way into making edits via the output this would display on the webpage.
+renderChart(data) {
+  var ctx = this.element.getContext('2d')
+  this.chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: data.labels,
+      datasets: [{
+        label: "Last 7 days transactions ",
+        borderWidth: 0,
+        borderTradius: 0,
+        pointRadius: 0,
+        backgroundColor: "transparent",
+        borderColor: "transparent",
+      },{
+        label: "Buy",
+        data: data.buy_data,
+        backgroundColor: "#687864",
+        borderColor: "#f7f9fb",
+        borderWidth: 1,
+        borderRadius: 5,
+        pointStyle: 'rectRot',
+        pointRadius: 5,
+        pointBorderColor: 'rgb(0, 0, 0)'
+      }, {
+        label: "Sell",
+        data: data.sell_data,
+        backgroundColor: "#8fc1e3",
+        borderColor: "#8fc1e3",
+        borderWidth: 1,
+        borderRadius: 5,
+        pointStyle: 'rectRot',
+        pointRadius: 5,
+        pointBorderColor: 'rgb(0, 0, 0)'
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      plugins: {
+        legend: {
+          labels: {
+            usePointStyle: true,
+          },
+          align: 'start',
+          position: 'top',
+        },
+        title: {
+          display: false,
+          text: 'Last 7 days transactions',
+          align: 'start',
+        }
+      }
+    }
+  })
+}
+```
+#### Thoughts
+I still don't fully understand how chart.js works. I find it interesting enough to study, but given the time constraints and working more towards this project's completion, I'd have to add it to the list of to-dos. I guess understanding it enough to get it to work is okay for now.
+
 ## Tests
 ### Setting up Test Suite
 For this project, we were required to use `rspec`. I followed the documentation for installation and setup:
