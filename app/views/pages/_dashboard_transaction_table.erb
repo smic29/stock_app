@@ -1,26 +1,26 @@
 <table id="user_transactions_table" class="table table-borderless mb-0">
     <tr class="small">
         <th></th>
-        <th class="fw-light">Bought</th>
-        <th class="fw-light">Sold</th>
-        <th class="fw-light">Count</th>
+        <th class="fw-light text-center">Bought</th>
+        <th class="fw-light text-center">Sold</th>
+        <th class="fw-light text-center">Count</th>
     </tr>
     <tr class="small">
         <th class="fw-light">Today</th>
         <td class="font-monospace">$ <%= data[:today][:buy] %></td>
         <td class="font-monospace">$ <%= data[:today][:sell] %></td>
-        <td><%= data[:today][:count] %></td>
+        <td class="text-center"><%= data[:today][:count] %></td>
     </tr>
     <tr class="small">
         <th class="fw-light">Yesterday</th>
         <td class="font-monospace">$ <%= data[:yesterday][:buy] %></td>
         <td class="font-monospace">$ <%= data[:yesterday][:sell] %></td>
-        <td><%= data[:yesterday][:count] %></td>
+        <td class="text-center"><%= data[:yesterday][:count] %></td>
     </tr>
     <tr class="small">
         <th class="fw-light">Last 7 days</th>
         <td class="font-monospace">$ <%= data[:week][:buy] %></td>
         <td class="font-monospace">$ <%= data[:week][:sell] %></td>
-        <td><%= data[:week][:count] %></td>
+        <td class="text-center"><%= data[:week][:count] %></td>
     </tr>
 </table>
