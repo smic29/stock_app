@@ -7,20 +7,20 @@
     </tr>
     <tr class="small">
         <th class="fw-light">Today</th>
-        <td class="font-monospace">$ <%= data[:today][:buy] %></td>
-        <td class="font-monospace">$ <%= data[:today][:sell] %></td>
+        <td class="font-monospace">$ <%= data[:today][:buy].round(2) %></td>
+        <td class="font-monospace">$ <%= data[:today][:sell].round(2) %></td>
         <td class="text-center"><%= data[:today][:count] %></td>
     </tr>
     <tr class="small">
         <th class="fw-light">Yesterday</th>
-        <td class="font-monospace">$ <%= data[:yesterday][:buy] %></td>
-        <td class="font-monospace">$ <%= data[:yesterday][:sell] %></td>
+        <td class="font-monospace">$ <%= data[:yesterday][:buy].round(2) %></td>
+        <td class="font-monospace">$ <%= data[:yesterday][:sell].round(2) %></td>
         <td class="text-center"><%= data[:yesterday][:count] %></td>
     </tr>
     <tr class="small">
         <th class="fw-light">Last 7 days</th>
-        <td class="font-monospace">$ <%= data[:week][:buy] %></td>
-        <td class="font-monospace">$ <%= data[:week][:sell] %></td>
+        <td class="font-monospace">$ <%= data[:week][:buy].round(2) %></td>
+        <td class="font-monospace">$ <%= data[:week][:sell].round(2) %></td>
         <td class="text-center"><%= data[:week][:count] %></td>
     </tr>
 </table>

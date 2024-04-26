@@ -17,10 +17,10 @@
                     Get Quote</a>
             </div>
             <div class="icon-div">
-                <span class="fs-3 fw-semibold">4</span>
+                <span class="fs-3 fw-semibold"><%= current_user.stocks.count %></span>
             </div>
             <div class="icon-div">
-                <span class="fs-3 fw-semibold">23</span>
+                <span class="fs-3 fw-semibold"><%= stock_quantity %></span>
             </div>
         </div>
         <div class="stock-icon-box d-flex justify-content-between align-items-center px-4 position-relative">

@@ -1,11 +1,11 @@
 <%= turbo_frame_tag "user_frame" do %>
 <div class="container-fluid">
     <% if current_user.approved? %>
-        <%= render 'pages/dashboard_assets_component' %>
-        <%= render 'pages/dashboard_transaction_chart' %>
-        <%= render 'pages/dashboard_stock_component' %>
+        <%= render 'pages/dashboard/assets_component' %>
+        <%= render 'pages/dashboard/transaction_component' %>
+        <%= render 'pages/dashboard/stock_component' %>
     <% else %>
-        <%= render 'pages/dashboard_unapproved_component' %>
+        <%= render 'pages/dashboard/unapproved_component' %>
     <% end %>
 </div>
 <% end %>

@@ -43,4 +43,13 @@ module PagesHelper
   def is_gain?
     portfolio_performance_percentage >= 0
   end
+
+  def stock_quantity
+    total = 0
+    current_user.stocks.each do |stock|
+      total += stock.quantity
+    end
+
+    total
+  end
 end

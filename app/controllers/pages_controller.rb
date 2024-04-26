@@ -77,7 +77,7 @@ class PagesController < ApplicationController
       format.json { render json: { labels: labels, buy_data: buy_data, sell_data: sell_data } }
       format.turbo_stream {
         render turbo_stream: [
-          turbo_stream.update("user_transactions_table", partial: "pages/dashboard_transaction_table", locals: { data: @data })
+          turbo_stream.update("user_transactions_table", partial: "pages/dashboard/transaction/table", locals: { data: @data })
         ] }
     end
 
