@@ -28,19 +28,59 @@ class PagesController < ApplicationController
     labels = []
     buy_data = []
     sell_data = []
+    @data = {
+      today: { buy: 0, sell: 0, count: 0 },
+      yesterday: { buy: 0, sell: 0, count: 0 },
+      week: { buy: 0, sell: 0, count: 0 }
+    }
 
     # Iterate over each day and count the number of buy and sell transactions
     grouped_transactions.each do |date, transactions|
       labels << date.strftime("%m-%d")
 
-      buy_count = transactions.count { |transaction| transaction.type == 'Buy' }
-      sell_count = transactions.count { |transaction| transaction.type == 'Sell' }
+      buy_count = 0
+      sell_count = 0
+      buy_price = 0
+      sell_price = 0
+
+      transactions.each do |transaction|
+        if transaction.type == 'Buy'
+          buy_count += 1
+          buy_price += transaction.price.to_f
+        else
+          sell_count += 1
+          sell_price += transaction.price.to_f
+        end
+      end
 
       buy_data << buy_count
       sell_data << sell_count
+
+      if date == Date.today
+        @data[:today][:buy] = buy_price
+        @data[:today][:sell] = sell_price
+        @data[:today][:count] = buy_count + sell_count
+      elsif date == Date.today - 1
+        @data[:yesterday][:buy] = buy_price
+        @data[:yesterday][:sell] = sell_price
+        @data[:yesterday][:count] = buy_count + sell_count
+      end
+
+      if date >= Date.today - 7
+        @data[:week][:buy] += buy_price
+        @data[:week][:sell] += sell_price
+        @data[:week][:count] += buy_count + sell_count
+      end
     end
 
-    render json: { labels: labels, buy_data: buy_data, sell_data: sell_data }
+    respond_to do |format|
+      format.json { render json: { labels: labels, buy_data: buy_data, sell_data: sell_data } }
+      format.turbo_stream {
+        render turbo_stream: [
+          turbo_stream.update("user_transactions_table", partial: "pages/dashboard_transaction_table", locals: { data: @data })
+        ] }
+    end
+
   end
 
   private

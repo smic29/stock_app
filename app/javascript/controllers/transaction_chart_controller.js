@@ -3,14 +3,29 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="transaction-chart"
 export default class extends Controller {
   connect() {
-    this.fetchData();
+    this.fetchDataAndTurboStream();
   }
 
-  fetchData() {
+  fetchDataAndTurboStream() {
     fetch('/user/chart_data')
       .then(response => response.json())
-      .then(data => this.renderChart(data))
+      .then(data => {
+        this.renderChart(data)
+        this.fetchTurboStream();
+      })
       .catch(error => console.error("Error fetching data:", error))
+  }
+
+  fetchTurboStream() {
+    fetch('/user/chart_data', { headers: { Accept: 'text/vnd.turbo-stream.html'} })
+      .then(response => response.text())
+      .then(html => {
+        const turboStreamElement = document.createElement('template')
+        turboStreamElement.innerHTML = html;
+        const turboStreamContent = turboStreamElement.content.firstElementChild
+        document.body.appendChild(turboStreamContent)
+      })
+      .catch(error => console.error("Error fetching Turbo Stream:", error))
   }
 
   renderChart(data) {
