@@ -20,7 +20,7 @@ export default class extends Controller {
       data: {
         labels: data.labels,
         datasets: [{
-          label: "Last 7 days transactions",
+          label: "Last 7 days transactions ",
           borderWidth: 0,
           borderTradius: 0,
           pointRadius: 0,

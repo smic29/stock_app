@@ -35,6 +35,17 @@ This project is styled mobile-first.
 - [UI Verse](https://uiverse.io/)
   - Loaders 
 
+## Development
+### Gem installed
+- [hotwire-livereload](https://github.com/kirillplatonov/hotwire-livereload)
+  - Helped speed up development time by autorefreshing the browser on changes made. It uses redis and action cables to make a websocket connection between the browser and the rails server.
+  - Requirements:
+    - redis installed
+      - Having redis in the Gemfile is not enough. I found that we'd need to run `sudo apt install redis-server`
+      - After installation `sudo service redis-server start`
+      - Then to check the status `sudo service redis-server status`
+      - Stopping it is: `sudo service redis-server stop`
+
 ## Processes
 ### Implementing Mailers:
 #### Resources:

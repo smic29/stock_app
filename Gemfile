@@ -38,3 +38,6 @@ group :test do
   gem 'shoulda-matchers', '~> 6.0'
 end
 
+
+gem "hotwire-livereload", "~> 1.3", :group => :development
+gem "redis"
