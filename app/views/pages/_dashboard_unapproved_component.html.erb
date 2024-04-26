@@ -1,0 +1,29 @@
+<div class="row bgc-dark-blue pb-4 rounded-bottom-5 shadow-sm">
+    <div class="row">
+        <div class="col-12 mt-5 txtc-air">
+            <h2 class="ms-3">
+                Welcome <%= current_user.name ? current_user.name : current_user.email %>!
+            </h2>
+        </div>
+    </div>
+    <div class="row mx-auto">
+        <span class="fw-semibold txtc-air">
+            Looks like our team is still looking into your account.
+        </span>
+    </div>
+    <div class="row mx-auto mt-3">
+        <span class="fw-light txtc-air small">
+            Once all the necessary checks on your account are done, you will receive an email to confirm the activation of your trading rights!
+        </span>
+    </div>
+</div>
+<div class="row">
+    <div class="vstack gap-2 rounded-4 shadow bgc-air p-3 m-3">
+        <div>
+            While you wait, why not try looking up the current prices of the tickers you've been watching...
+        </div>
+        <div>
+            <%= turbo_frame_tag "modal_frame", src: quote_path %>
+        </div>
+    </div>
+</div>

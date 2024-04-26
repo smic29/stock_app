@@ -1,46 +1,11 @@
 <%= turbo_frame_tag "user_frame" do %>
 <div class="container-fluid">
-    <div class="row bgc-light-blue pb-4 rounded-bottom-5 shadow-sm">
-        <div class="row">
-            <div class="mt-5">
-                <div class="col-12" id="user_greeting">
-                    <h2 class="ms-3">Welcome <%= current_user.name ? current_user.name : current_user.email %>!</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row mx-auto">
-            <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
-                <h3 class="fw-bold font-monospace mb-0 lh-1">
-                    <span class="text-success">$</span> 
-                    <span class=""><%= format('%.2f', current_user.cash) %></span>
-                </h3>
-                <small class="fw-lighter">Balance Remaining</small>
-            </div>
-            <div class="col-5 p-3 mx-auto rounded bg-light d-flex flex-column justify-content-center align-items-center shadow-sm">
-                <div class="d-flex align-items-center">
-                    <h3 class="fw-bold font-monospace mb-0 lh-1 
-                    <%= is_gain? ? 'text-success' : 'text-danger' %>">
-                        <span class="">$</span> 
-                        <span class=""><%= format('%.2f', get_market_value) %></span>
-                    </h3>
-                    <div class="ms-1">
-                        <% if is_gain? %>
-                        <small class="text-success"><i class="fa-solid fa-arrow-up fa-sm"></i></small>
-                        <% else %>
-                        <small class="text-danger"><i class="fa-solid fa-arrow-down fa-sm"></i></small>
-                        <% end %>
-                    </div>
-                </div>
-                <small class="fw-lighter">Portfolio Value</small>
-            </div>
-        </div>
-        <div class="row mt-3 mx-auto">
-            <div class="col-12 text-center">
-                <%= render 'pages/progress_bar' %>
-            </div>
-        </div>
-    </div>
-    <%= render 'pages/dashboard_transaction_chart' %>
-    <%= render 'pages/dashboard_stock_component' %>
+    <% if current_user.approved? %>
+        <%= render 'pages/dashboard_assets_component' %>
+        <%= render 'pages/dashboard_transaction_chart' %>
+        <%= render 'pages/dashboard_stock_component' %>
+    <% else %>
+        <%= render 'pages/dashboard_unapproved_component' %>
+    <% end %>
 </div>
 <% end %>
