@@ -1,7 +1,7 @@
 <div class="row position-relative">
     <div class="col-11 rounded-4 shadow-sm position-relative mx-auto bgc-air" style="top: -1rem;">
         <canvas id="myChart"  style="min-height: 150px;" data-controller="transaction-chart"></canvas>
-        <table id="user_transactions_table" class="table table-borderless">
+        <table id="user_transactions_table" class="table table-borderless mb-0">
             <tr class="small">
                 <th></th>
                 <th class="fw-light">Bought</th>
@@ -27,6 +27,9 @@
                 <td class="placeholder-glow"><span class="placeholder col-5 rounded-pill"></td>
             </tr>
         </table>
+        <div class="text-center mb-2">
+            <%= link_to 'View all', transactions_path, class: "btn btn-sm btn-outline-secondary" %>
+        </div>
     </div>
 </div>
 
