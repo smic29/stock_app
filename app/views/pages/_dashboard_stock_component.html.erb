@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-11 rounded-4 shadow-sm mx-auto bgc-air">
+        <div class="stock-icon-box d-flex justify-content-between pt-3 px-4">
+            <div class="icon-div rounded-circle bgc-gray-blue border">
+                <i class="fa-solid fa-check fa-2xl txtc-air"></i>
+            </div>
+            <div class="icon-div rounded-circle bgc-gray-blue">
+                <i class="fa-solid fa-chart-column fa-2xl txtc-air"></i>
+            </div>
+            <div class="icon-div rounded-circle bgc-gray-blue">
+                <i class="fa-solid fa-hashtag fa-2xl txtc-air"></i>
+            </div>
+        </div>
+        <div class="stock-icon-box d-flex justify-content-between align-items-center px-4">
+            <div class="icon-div">
+                <a href="<%= quote_path %>" class="btn btn-sm btn-success badge" data-controller="modal" data-action="click->modal#open" data-bs-toggle="modal" data-bs-target="#appModal">
+                    Get Quote</a>
+            </div>
+            <div class="icon-div">
+                <span class="fs-3 fw-semibold">4</span>
+            </div>
+            <div class="icon-div">
+                <span class="fs-3 fw-semibold">23</span>
+            </div>
+        </div>
+        <div class="stock-icon-box d-flex justify-content-between align-items-center px-4 position-relative">
+            <div class="icon-div">
+                <span class="fw-light">Trade Ready</span>
+            </div>
+            <div class="icon-div">
+                <span class="fw-light">Tickers Owned</span>
+            </div>
+            <div class="icon-div">
+                <span class="fw-light">Total Stocks</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -41,26 +41,6 @@
         </div>
     </div>
     <%= render 'pages/dashboard_transaction_chart' %>
+    <%= render 'pages/dashboard_stock_component' %>
 </div>
-
-<%# This is being kept right now just for reference %>
-<div>
-    <h3>Welcome <%= current_user.name ? current_user.name : current_user.email %></h3>
-</div>
-Your trading status is <%= current_user.approved? ? 'Enabled' : 'Disabled' %>
-<br>
-You have <%= current_user.cash %>
-<br>
-<%= link_to 'Get a Quote', quote_path, class: "btn btn-outline-success btn-sm", data: {
-    controller: "modal",
-    action: "click->modal#open",
-    bs_toggle: "modal",
-    bs_target: "#appModal"
-} %>
-<br>
-<%= link_to 'Transactions', transactions_path %>
-<br>
-<%= link_to 'Stocks', stocks_path %>
-<%# This is the end of the reference file %>
-
 <% end %>
