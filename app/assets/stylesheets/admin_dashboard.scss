@@ -16,6 +16,14 @@
     &-dark-blue {
         box-shadow: 0 0.5rem 1rem #31708e !important;
     }
+    
+    &-gray-blue {
+        box-shadow: 0 0.5rem 1rem #5085A5 !important;
+    }
+    
+    &-light-blue {
+        box-shadow: 0 0.5rem 1rem #8fc1e3 !important;
+    }
 
     &-sm {
         &-earth {
@@ -25,6 +33,25 @@
         &-evening {
             box-shadow: 0 0.125rem 0.25rem #8a2be2 !important;
         }
+        
+        &-noon {
+            box-shadow: 0 0.125rem 0.25rem #daa520 !important;
+        }
     }
 
+}
+
+.txtc-noon.bgc-dark-blue {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-family: "Montserrat";
+}
+
+.font {
+    &-mont {
+        font-family: "Montserrat";
+    }
+
+    &-robo {
+        font-family: "Roboto";
+    }
 }
