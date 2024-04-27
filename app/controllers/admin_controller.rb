@@ -24,6 +24,15 @@ class AdminController < ApplicationController
     end
   end
 
+  def chart_data
+    users = User.is_a_user.count
+    verified_users = User.is_verified_trader.count
+    pending_users = User.is_pending_approval.count
+    unconfirmed_users = users - (verified_users + pending_users)
+
+    render json: { labels: ['verified','pending','unconfirmed'], verified: verified_users, pending: pending_users, unconfirmed: unconfirmed_users }
+  end
+
   def transactions
     @transactions = Transaction.all.order(created_at: :desc)
   end

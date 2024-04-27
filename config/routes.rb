@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get "pending" => "admin#pending", as: :pending_approval
     patch "approve/:id" => "admin#approve", as: :user_approve
     get "transactions" => "admin#transactions", as: :admin_transactions
+    get "chart_data" => "admin#chart_data", as: :admin_chart_data
   end
   namespace :admin do
     resources :users
