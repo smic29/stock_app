@@ -27,10 +27,10 @@ export default class extends Controller {
           label: "App Users",
           data: [data.verified, data.pending, data.unconfirmed],
           backgroundColor: [
-            '#8fc1e3', '#687864', '#f7f9fb'
+            '#8fc1e3', '#687864', '#ff7f50'
           ],
           borderWidth: 1,
-          borderColor: ['#5085A5', '#31708e', '#687864'],
+          borderColor: ['#5085A5', '#31708e', '#ff6347'],
           hoverOffset: 4
         }]
       },
