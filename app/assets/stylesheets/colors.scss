@@ -3,7 +3,11 @@ $colors: (
     gray-blue: #5085A5,
     light-blue: #8fc1e3,
     earth: #687864,
-    air: #f7f9fb
+    air: #f7f9fb,
+    sunset: #ff7f50,
+    sunrise: #ff6347,
+    noon: #daa520,
+    evening: #8a2be2,
 );
 
 @mixin bgc {
@@ -25,4 +29,3 @@ $colors: (
 @include bgc;
 @include txtc;
 
-$table-bg: transparent;

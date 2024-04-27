@@ -1,9 +1,9 @@
 @import "defaults";
 @import "colors";
-@import "navbar";
-@import "loader";
-@import "stock_component";
 @import "font-awesome";
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "navbar";
+@import "loader";
+@import "stock_component";
