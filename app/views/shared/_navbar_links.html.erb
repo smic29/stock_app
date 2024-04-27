@@ -1,5 +1,5 @@
 <% if current_user.admin? %>
-    <%= nav_link admin_path, "admin_dash", "fa-house", true %>
+    <%= nav_link admin_dashboard_path, "admin_dash", "fa-house", true %>
     <%= nav_link admin_users_path, "admin_dash", "fa-users" %>
     <%= pending_users_link %>
     <%= nav_link admin_transactions_path, "admin_dash", "fa-receipt" %>
