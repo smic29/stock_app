@@ -1,13 +1,11 @@
-require 'yahoo_finance'
-
 class AdminController < ApplicationController
   before_action :has_admin_access
   before_action :set_user, only: [:approve]
 
   def home
-    # @user_count = User.is_a_user.count => Turned into a helper
-    # @trader_request_count = User.is_pending_approval.count
-    # @verified_traders_count = User.is_verified_trader.count
+  end
+
+  def dashboard
     @transactions = Transaction.all.order(created_at: :desc).limit(5)
   end
 

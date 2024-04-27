@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     get "/" => "admin#home", as: :admin
+    get "dashboard" => "admin#dashboard", as: :admin_dashboard
     get "pending" => "admin#pending", as: :pending_approval
     patch "approve/:id" => "admin#approve", as: :user_approve
     get "transactions" => "admin#transactions", as: :admin_transactions

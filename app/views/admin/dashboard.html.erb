@@ -1,0 +1,57 @@
+<%= turbo_frame_tag "admin_dash" do %>
+    <div class="row mb-3 px-5">
+        <div class="mx-auto col-6 border rounded p-2 text-center d-flex flex-column align-items-center shadow">
+            <h6>User Count</h6>
+            <div class="rounded-circle border border-5 border-secondary-subtle p-3 my-3">
+                <span class="font-weight-bold text-tertiary h1">
+                    <%= user_count %>
+                </span>
+            </div>
+
+            <%= link_to 'Users', admin_users_path, class: 'btn btn-sm btn-outline-secondary' %>
+        </div>
+    </div>
+    <div class="row px-4">
+        <div class="col-5 mx-auto border rounded p-2 text-center d-flex flex-column align-items-center shadow">
+            <h6>Requests</h6>
+            <div class="rounded-circle border border-5 border-warning-subtle p-3 my-2">
+                <span class="font-weight-bold text-tertiary h3 mx-1">
+                    <%= trader_request_count %>
+                </span>
+            </div>
+            <%= link_to 'View All', pending_approval_path, class: 'btn btn-sm btn-outline-secondary' %>
+        </div>
+
+        <div class="col-5 mx-auto border rounded p-2 text-center d-flex flex-column align-items-center shadow">
+            <h6>Verified</h6>
+            <div class="rounded-circle border border-5 border-success-subtle p-3 my-2">
+                <span class="font-weight-bold text-tertiary h3 mx-1">
+                    <%= verified_traders_count %>
+                </span>
+            </div>
+            <h6 class="mt-1">Traders</h6>
+        </div>
+    </div>
+    <div class="row mt-3 gx-2">
+        <div class="col-12 mx-auto border rounded p-2 d-flex flex-column shadow">
+            <h6 class="border-bottom border-2 mb-2">Recent Transactions</h6>
+        <% @transactions.each do |transaction| %>
+            <div class="d-flex justify-content-between align-items-center mb-1 px-2">
+                <div class="d-flex align-items-center gap-3">
+                    <%= render_icon transaction %>
+                    <div class="d-flex flex-column">
+                        <small class="text-body-secondary"><%= transaction.user.email %></small>
+                        <span><%= transaction.stock.symbol %></span>
+                    </div>
+                </div>
+                <div>
+                    <%= is_buy?(transaction) ? '+' : '-' %>$<%= transaction.price %>
+                </div>
+            </div>
+        <% end %>
+            <div class="text-center">
+                <%= link_to 'See more transactions', admin_transactions_path, class: 'btn btn-sm btn-outline-secondary' %>
+            </div>
+        </div>
+    </div>
+<% end %>

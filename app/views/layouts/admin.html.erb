@@ -8,10 +8,12 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
 
   <body>
-    <main class="p-1 vh-100">
+    <main class="vh-100">
       <%= yield %>
     </main>
     <aside>
