@@ -1,0 +1,30 @@
+.smallest-boi {
+    font-size: 0.70rem;
+    font-style: italic;
+    color: lightgray;
+}
+
+.shadow {
+    &-earth {
+        box-shadow: 0 0.5rem 1rem #687864 !important;
+    }
+
+    &-evening {
+        box-shadow: 0 0.5rem 1rem #8a2be2 !important;
+    }
+
+    &-dark-blue {
+        box-shadow: 0 0.5rem 1rem #31708e !important;
+    }
+
+    &-sm {
+        &-earth {
+            box-shadow: 0 0.125rem 0.25rem #687864 !important;
+        }
+    
+        &-evening {
+            box-shadow: 0 0.125rem 0.25rem #8a2be2 !important;
+        }
+    }
+
+}
