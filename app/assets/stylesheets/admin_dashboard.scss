@@ -24,6 +24,10 @@
     &-light-blue {
         box-shadow: 0 0.5rem 1rem #8fc1e3 !important;
     }
+    
+    &-sunset {
+        box-shadow: 0 0.5rem 1rem #ff7f50 !important;
+    }
 
     &-sm {
         &-earth {
@@ -57,9 +61,8 @@
 
 }
 
-.txtc-noon.bgc-dark-blue {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-    font-family: "Montserrat";
+.admin-header {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .font {
@@ -69,5 +72,66 @@
 
     &-robo {
         font-family: "Roboto";
+    }
+}
+
+// Users Component 
+.chart-wrapper {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+
+    .chart-container {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+    
+        .total-users-count {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #31708e;
+        }
+    
+        #admin_users_chart {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 250px;
+            max-height: 250px;
+        }
+    }
+}
+
+.text-bg-sunset {
+    background-color: #ff7f50;
+    color: #fff;
+}
+
+.custom-btn-outline {
+    color: #5085A5 !important;
+    border-color: #5084A5 !important;
+    background-color: transsaparent;
+
+    &:hover,&:focus,&:active {
+        color: #fff !important;
+        background-color: #5085A5 !important;
+        border-color: #5084A5 !important;
+    }
+}
+
+.custom-btn {
+    color: #fff !important;
+    background-color: #5085A5 !important;
+    border-color: #5085A5 !important;
+
+    &:hover, &:focus, &:active {
+        color: #5085A5 !important;
+        background-color: transparent !important;
+        border-color: #5085A5 !important;
     }
 }

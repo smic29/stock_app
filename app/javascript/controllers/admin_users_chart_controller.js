@@ -27,15 +27,15 @@ export default class extends Controller {
           label: "App Users",
           data: [data.verified, data.pending, data.unconfirmed],
           backgroundColor: [
-            '#8fc1e3', '#687864', '#ff7f50'
+            '#8fc1e3', '#31708e', '#ff7f50'
           ],
-          borderWidth: 1,
-          borderColor: ['#5085A5', '#31708e', '#ff6347'],
+          borderWidth: 2,
+          borderColor: '#fff',
           hoverOffset: 4
         }]
       },
       options: {
-        responsive: true,
+        responsive: false,
         plugins: {
           title: {
             display: true,
@@ -43,6 +43,7 @@ export default class extends Controller {
             font: {
               size: 16,
               weight: 'bold',
+              family: 'Montserrat'
             }
           },
           legend: {

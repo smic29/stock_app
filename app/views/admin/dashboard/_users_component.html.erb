@@ -1,26 +1,26 @@
-<div class="row bgc-gray-blue rounded-bottom-5 shadow py-3 text-center shadow-light-blue">
-    <span class="txtc-noon display-6 bgc-dark-blue rounded-bottom-5 py-2 fw-bolder mb-2 shadow-sm shadow-sm-noon">StockApp Admin</span>
-    <div class="mx-auto col-9 border rounded-4 p-2 mb-3 text-center bgc-air shadow shadow-light-blue">
-        <div class="position-relative">
-            <span id="total_users" class="position-absolute top-50 start-50 translate-middle display-4 font-monospace user-select-none"></span>
-            <canvas id="admin_users_chart" class="shadow-sm rounded-5 shadow-sm-earth" style="max-width:300px; max-height:200px"  data-controller="admin-users-chart"></canvas>
+<div class="row bgc-dark-blue rounded-bottom-5 shadow py-3 text-center shadow-light-blue mb-4">
+    <span class="admin-header font-mont txtc-sunset display-6 bgc-gray-blue rounded-bottom-5 py-2 fw-bold mb-2 shadow-sm shadow-sm-sunset">StockApp Admin</span>
+    <div class="mx-auto col-9 border rounded-4 p-2 mb-3 text-center bgc-air shadow-light-blue">
+        <div class="chart-wrapper position-relative mb-4">
+            <div class="chart-container">
+                <span id="total_users" class="total-users-count font-mont user-select-none fw-semibold"></span>
+                <canvas id="admin_users_chart" width="300" height="300" data-controller="admin-users-chart"></canvas>
+            </div>
         </div>
-        <div class="vstack gap-1 mt-2">
-            <div>
-                <% if User.is_pending_approval.count > 0 %>
-                <a href="<%= pending_approval_path %>" class="btn btn-sm btn-outline-primary w-100">
+        <div class="btn-group-vertical w-100">
+            <% if User.is_pending_approval.count > 0 %>
+                <a href="<%= pending_approval_path %>" class="btn btn-sm btn-outline-primary custom-btn">
                     Approve Requests
-                    <span class="badge text-bg-danger">
+                    <span class="badge text-bg-sunset">
                     <%= User.is_pending_approval.count %>
                     </span>
                 </a>
-                <% else %>
-                <a href="<%= pending_approval_path %>" class="btn btn-sm btn-secondary w-100 pe-none user-select-none">
-                    No Pending Requests
-                </a>
-                <% end %>
-            </div>
-            <%= link_to 'View Users', admin_users_path, class: "btn btn-sm btn-outline-secondary" %>
+            <% else %>
+            <a href="<%= pending_approval_path %>" class="btn btn-sm btn-secondary pe-none user-select-none">
+                No Pending Requests
+            </a>
+            <% end %>
+            <%= link_to 'View Users', admin_users_path, class: "font-mont btn btn-sm custom-btn-outline" %>
         </div>
     </div>
 </div>
