@@ -44,7 +44,7 @@ export default class extends Controller {
         },{
           label: "Buy",
           data: data.buy_data,
-          backgroundColor: "#687864",
+          backgroundColor: "#31708e",
           borderColor: "#f7f9fb",
           borderWidth: 1,
           borderRadius: 5,
@@ -55,7 +55,7 @@ export default class extends Controller {
           label: "Sell",
           data: data.sell_data,
           backgroundColor: "#8fc1e3",
-          borderColor: "#8fc1e3",
+          borderColor: "#5085A5",
           borderWidth: 1,
           borderRadius: 5,
           pointStyle: 'rectRot',
@@ -67,7 +67,18 @@ export default class extends Controller {
         scales: {
           y: {
             beginAtZero: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+              display: false
+            }
           },
+          x: {
+            grid: {
+              display: false
+            }
+          }
         },
         plugins: {
           legend: {
