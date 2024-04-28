@@ -17,9 +17,9 @@ module AdminHelper
 
   def render_icon(transaction)
     if is_buy?(transaction)
-      content_tag(:i, nil, class: "fa-solid fa-money-bill-wave fa-xl text-danger")
+      content_tag(:i, nil, class: "fa-solid fa-money-bill-wave fa-xl txtc-sunset")
     else
-      content_tag(:i, nil, class: "fa-solid fa-hand-holding-dollar fa-xl text-success")
+      content_tag(:i, nil, class: "fa-solid fa-hand-holding-dollar fa-xl txtc-dark-blue")
     end
   end
 end
