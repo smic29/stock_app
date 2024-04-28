@@ -1,6 +1,7 @@
 .dash-link {
     i {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     // color: $earth;
@@ -9,7 +10,7 @@
     i {
         transform: translateY(-3px); /* Raise the icon */
         text-decoration: none; /* Add underline */
-        color: black;
+        color: #ff7f50;
         
         &::after {
             content: "";
@@ -18,7 +19,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: black; /* Color of the underline */
+            background-color: #ff7f50; /* Color of the underline */
             transition: bottom 0.3s ease-in-out;
         }
     }
