@@ -1,15 +1,30 @@
 <%= turbo_frame_tag "modal_frame" do %>
     <%= form_with(url: quote_path, method: :post) do |f| %>
-    <div class="d-flex">
-        <div>
-            <%= f.text_field :symbol, placeholder: "Symbol" %>
-        </div>
-        <div>
-            <%= f.submit "Get Quote", class: "btn btn-sm btn-outline-success" %>
+    <div class="d-flex" data-controller="quote-form">
+        <div class="input-group mb-3 position-relative">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            </button>
+            <%= f.text_field :symbol, placeholder: "Ticker Symbol", class: "form-control", autocomplete: 'off', required: true %>
+            <button id="clearSymbol" type="button" class="btn-sm btn-close position-absolute top-50 translate-middle" style="right: 2.50rem; z-index: 999; font-size: 0.75rem;"></button>
+            <ul class="dropdown-menu text-center">
+                <li><span class="dropdown-header user-select-none">Owned</span></li>
+                <% @owned_tickers.each do |ticker| %>
+                <li><span class="dropdown-item cursor-pointer user-select-none"><%= ticker.symbol %></span></li>
+                <% end %>
+                <li><hr class="dropdown-divider"></li>
+                <li><span class="dropdown-header user-select-none">Recommended</span></li>
+                <% @samples.each do |sample| %>
+                <li><span class="dropdown-item cursor-pointer user-select-none"><%= sample %></span></li>
+                <% end %>
+            </ul>
+            
+            <%= button_tag(class: "btn btn-sm custom-btn", name: 'commit') do %>
+                <i class="fa-solid fa-magnifying-glass-dollar fa-xl"></i>
+            <% end %>
         </div>
     </div>
     <% end %>
     <%= turbo_frame_tag "quote_result_frame" do %>
-        Loading...
+        I should place a loader here or something. I dunno
     <% end %>
 <% end %>

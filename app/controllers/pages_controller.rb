@@ -11,6 +11,8 @@ class PagesController < ApplicationController
   end
 
   def quote
+    @samples = TickerGenerator.generate_samples(3)
+    @owned_tickers = current_user.stocks
 
     respond_to do |format|
       @data = lookup_symbol(params[:symbol])
@@ -80,7 +82,6 @@ class PagesController < ApplicationController
           turbo_stream.update("user_transactions_table", partial: "pages/dashboard/transaction/table", locals: { data: @data })
         ] }
     end
-
   end
 
   private
