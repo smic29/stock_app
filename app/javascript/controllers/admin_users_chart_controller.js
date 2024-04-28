@@ -41,7 +41,7 @@ export default class extends Controller {
             display: true,
             text: 'StockApp Users',
             font: {
-              size: 16,
+              size: 20,
               weight: 'bold',
               family: 'Montserrat'
             }
@@ -50,7 +50,10 @@ export default class extends Controller {
             position: 'bottom',
             labels: {
               usePointStyle: true,
-              padding: 20
+              padding: 20,
+              font: {
+                family: 'Roboto'
+              }
             }
           },
           doughnutlabel: {
