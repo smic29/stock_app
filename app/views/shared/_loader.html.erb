@@ -22,7 +22,7 @@
   </div>
 </div>
 <% else %>
-  <div class="banter-loader">
+  <div class="banter-loader" data-controller="loaders">
     <div class="banter-loader__box"></div>
     <div class="banter-loader__box"></div>
     <div class="banter-loader__box"></div>
@@ -32,5 +32,6 @@
     <div class="banter-loader__box"></div>
     <div class="banter-loader__box"></div>
     <div class="banter-loader__box"></div>
+    <span class="text-nowrap text-center font-robot position-relative visually-hidden" style="left: -5rem;">Seems to be taking a while..</span>
   </div>
 <% end %>
