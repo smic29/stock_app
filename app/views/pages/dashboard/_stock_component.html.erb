@@ -1,41 +1,41 @@
 <div class="row">
-    <div class="col-11 rounded-4 shadow-sm mx-auto bgc-air">
+    <div class="col-11 rounded-4 shadow-sm shadow-sm-gray-blue mx-auto bgc-air">
         <div class="stock-icon-box d-flex justify-content-between pt-3 px-4">
-            <div class="icon-div rounded-circle bgc-gray-blue border">
+            <div class="icon-div rounded-circle bgc-gray-blue shadow-sm shadow-sm-earth">
                 <i class="fa-solid fa-check fa-2xl txtc-air"></i>
             </div>
-            <div class="icon-div rounded-circle bgc-gray-blue">
+            <div class="icon-div rounded-circle bgc-gray-blue shadow-sm shadow-sm-earth">
                 <i class="fa-solid fa-chart-column fa-2xl txtc-air"></i>
             </div>
-            <div class="icon-div rounded-circle bgc-gray-blue">
+            <div class="icon-div rounded-circle bgc-gray-blue shadow-sm shadow-sm-earth">
                 <i class="fa-solid fa-hashtag fa-2xl txtc-air"></i>
             </div>
         </div>
         <div class="stock-icon-box d-flex justify-content-between align-items-center px-4">
             <div class="icon-div">
-                <a href="<%= quote_path %>" class="btn btn-sm btn-success badge" data-controller="modal" data-action="click->modal#open" data-bs-toggle="modal" data-bs-target="#appModal">
+                <a href="<%= quote_path %>" class="font-mont btn btn-sm btn-success badge" data-controller="modal" data-action="click->modal#open" data-bs-toggle="modal" data-bs-target="#appModal">
                     Get Quote</a>
             </div>
             <div class="icon-div">
-                <span class="fs-3 fw-semibold"><%= current_user.stocks.count %></span>
+                <span class="fs-3 fw-semibold font-mont"><%= current_user.stocks.count %></span>
             </div>
             <div class="icon-div">
-                <span class="fs-3 fw-semibold"><%= stock_quantity %></span>
+                <span class="fs-3 fw-semibold font-mont"><%= stock_quantity %></span>
             </div>
         </div>
         <div class="stock-icon-box d-flex justify-content-between align-items-center px-4 position-relative">
             <div class="icon-div">
-                <span class="fw-light">Trade Ready</span>
+                <span class="fw-light font-mont">Trade Ready</span>
             </div>
             <div class="icon-div">
-                <span class="fw-light">Tickers Owned</span>
+                <span class="fw-light font-mont">Tickers Owned</span>
             </div>
             <div class="icon-div">
-                <span class="fw-light">Total Stocks</span>
+                <span class="fw-light font-mont">Total Stocks</span>
             </div>
         </div>
         <div class="mx-auto text-center pb-3">
-            <%= link_to 'View Portfolio', stocks_path, class: "btn btn-sm btn-outline-secondary" %>
+            <%= link_to 'View Portfolio', stocks_path, class: "font-mont btn btn-sm btn-outline-secondary" %>
         </div>
     </div>
 </div>
