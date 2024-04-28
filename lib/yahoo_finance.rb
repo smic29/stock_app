@@ -33,6 +33,7 @@ module YahooFinance
         request['User-Agent'] = "SpicyStockApp/1.0"
 
         response = http.request(request)
+        # puts uri # This is for when I want to check the data.
 
         if response.is_a?(Net::HTTPSuccess)
           hash_result.store(sym, process_output(JSON.parse(response.body)))
@@ -51,14 +52,18 @@ module YahooFinance
     def process_output(json)
       result = {}
       base = json["chart"]["result"]
-      return "No data available" if base == nil
+      return nil if base == nil
 
       prices = base[0]["indicators"]["adjclose"][0]["adjclose"]
+      misc_data = base[0]['meta']
 
-      return "Price history unavailable" if prices == nil
+      return nil if prices == nil
 
       result["prices"] = prices.map { |price| price.round(2) } # sample.round(2)
-      result["price"] = prices.sample.round(2)
+      result["symbol"] = misc_data['symbol']
+      result["yearHigh"] = misc_data['fiftyTwoWeekHigh']
+      result["yearLow"] = misc_data['fiftyTwoWeekLow']
+      result["previousClose"] = misc_data['chartPreviousClose']
       result
     end
 

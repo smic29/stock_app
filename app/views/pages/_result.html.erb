@@ -1,13 +1,22 @@
 <div class="my-2">
-    <% key = data.keys.first %><% price = data[key]["price"] %>
-    <h4>
-        <%= key.upcase %>: 
-    </h4>
-    <div class="mb-1">
-        Current Market Price: $ <%= price %>
-    </div>
-    <br>
-    <% if current_user.approved? && price != nil %>
-        <%= render partial: 'pages/transact_form', locals: { key: key, price: price} %>
+    <% unless data.nil? || data == 'No data found' %>
+        <h4>
+            <%= data["symbol"] %>: 
+        </h4>
+            <% price = data["prices"].sample %>
+            <div class="mb-1">
+                Current Market Price: $ <%= price %> <br>
+                52-week High: $ <%= data["yearHigh"] %> <br>
+                52-week Low: $ <%= data["yearLow"] %> <br>
+                previousClose: $ <%= data["previousClose"] %>
+            </div>
+            <br>
+            <% if current_user.approved? && price != nil %>
+                <%= render partial: 'pages/transact_form', locals: { key: data["symbol"], price: price} %>
+            <% end %>
+    <% else %>
+        <div>
+        Invalid Stock or Stock doesn't exist. 
+        </div>
     <% end %>
 </div>

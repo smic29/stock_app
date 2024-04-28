@@ -4,13 +4,25 @@ module PagesHelper
       total_value = 0
       stock_data = session[:symbol_data]
 
-      stock_data.each do |symbol, data|
-        average_price = data["prices"].sum / data["prices"].size.to_f
-        user_stock = current_user.stocks.find_by(symbol: symbol)
+      # Keeping this for the time being since this is the first method I did.
+      # stock_data.each do |symbol, data|
+      #   next if data.nil? || data == 'No data found'
+      #   user_stock = current_user.stocks.find_by(symbol: symbol)
 
-        if user_stock
-          total_value += average_price * user_stock.quantity
-        end
+      #   average_price = data["prices"].sum / data["prices"].size.to_f
+
+      #   if user_stock
+      #     total_value += average_price * user_stock.quantity
+      #   end
+      # end
+
+      user_stocks = current_user.stocks
+
+      user_stocks.each do |stock|
+        prices = stock_data[stock.symbol]["prices"]
+        market_value = prices.sum / prices.size.to_f
+
+        total_value += market_value * stock.quantity
       end
 
       total_value

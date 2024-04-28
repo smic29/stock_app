@@ -15,7 +15,16 @@ class PagesController < ApplicationController
     @owned_tickers = current_user.stocks
 
     respond_to do |format|
-      @data = lookup_symbol(params[:symbol])
+      symbol = params[:symbol]
+
+      unless session[:symbol_data][symbol]
+        session[:symbol_data].update(lookup_symbol(symbol))
+      end
+
+      @data = session[:symbol_data][symbol]
+
+      puts @data
+      puts session[:symbol_data][params[:symbol]]
 
       format.turbo_stream
     end if request.post?

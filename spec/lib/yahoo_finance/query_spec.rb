@@ -13,7 +13,8 @@ RSpec.describe YahooFinance::Query do
       expect(data).to be_a(Hash)
       expect(data[symbol]).to include('prices')
       expect(data[symbol]['prices']).to be_a(Array)
-      expect(data[symbol]['prices']).to include(data[symbol]['price'])
+      expect(data[symbol]['previousClose']).to be_a(Numeric)
+      expect(data[symbol]['symbol']).to include(symbol)
     end
 
     it 'handles empty responses' do
@@ -31,22 +32,26 @@ RSpec.describe YahooFinance::Query do
       data = query.quote(symbols)
 
       symbols.each do |symbol|
-        next if data[symbol] == "No data found"
+        next if data[symbol] == "No data found" || data[symbol].nil?
 
-        expect(data).to include(symbol)
-        expect(data[symbol]).to be_a(Hash)
-        expect(data[symbol]).to include('price')
+        expect(data[symbol]).to include(
+          'previousClose',
+          'prices',
+          'symbol',
+          'yearHigh',
+          'yearLow'
+        )
       end
+
       expect(data.keys.count).to eq(5)
     end
 
-    it 'handles responses with no prices' do
+    it 'handles invalid responses' do
       symbol = 'APPL'
       query = YahooFinance::Query.new
       data = query.quote(symbol)
 
-      expect(data[symbol]).not_to include('price')
-      expect(data[symbol]).to include("Price history unavailable")
+      expect(data[symbol]).to be_nil
     end
   end
 end

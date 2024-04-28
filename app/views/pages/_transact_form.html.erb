@@ -3,15 +3,15 @@
         <%= f.hidden_field :symbol, value: key %>
         <%= f.hidden_field :price, value: price %>
         Your Cash: $ <%= number_with_precision(current_user.cash, precision: 2) %> <br>
-        <% if current_user.stocks.exists?(symbol: key.upcase) %>
-            You own: <%= current_user.stocks.find_by(symbol: key.upcase).quantity %><br>
+        <% if current_user.stocks.exists?(symbol: key) %>
+            You own: <%= current_user.stocks.find_by(symbol: key).quantity %><br>
         <% end %>
         Quantity:
         <%= f.number_field :quantity, max: (current_user.cash / price).floor, data: {
             controller: "transact-input"
         }, required: true %> <br>
         <%= f.submit "Buy" %>
-        <% if current_user.stocks.exists?(symbol: key.upcase) %>
+        <% if current_user.stocks.exists?(symbol: key) %>
         <%= f.submit "Sell" %>
         <% end %>
     <% end %>
