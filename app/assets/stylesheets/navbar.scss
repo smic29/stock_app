@@ -24,6 +24,23 @@
         }
     }
 
+    .user-link {
+        transform: translateY(-3px); /* Raise the icon */
+        text-decoration: none; /* Add underline */
+        color: #31708e;
+        
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #31708e; /* Color of the underline */
+            transition: bottom 0.3s ease-in-out;
+        }
+    }
+
 }
 
 .dash-link.disabled {
@@ -33,4 +50,8 @@
     }
     
     pointer-events: none;
+}
+
+.txt-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }

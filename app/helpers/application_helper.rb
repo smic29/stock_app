@@ -19,10 +19,10 @@ module ApplicationHelper
   end
 
   def nav_link(path, frame, icon, active = false)
-    color = current_user.admin? ? 'txtc-air' : 'txtc-earth'
+    user_tag = current_user.admin? ? '' : 'user-link'
 
-    link_to path, data: { turbo_frame: frame }, class: "#{color} dash-link #{active ? 'active' : ''}" do
-      content_tag(:i, '', class: "fa-solid fa-xl #{icon}")
+    link_to path, data: { turbo_frame: frame }, class: "txtc-air dash-link #{active ? 'active' : ''}" do
+      content_tag(:i, '', class: "fa-solid fa-xl #{icon} #{user_tag}")
     end
   end
 end

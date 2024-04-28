@@ -1,10 +1,10 @@
-<nav class="navbar fixed-bottom bgc-dark-blue">
+<nav class="navbar fixed-bottom <%= current_user.admin? ? 'bgc-dark-blue' : 'bgc-light-blue' %>">
   <div class="container-fluid">
     <div class="d-flex mx-auto gap-5 py-2" data-controller="navbar">
         <%= render 'shared/navbar_links' %>
     </div>
     <div class="position-absolute end-0 me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-        <i class="fa-solid fa-grip-lines fa-rotate-180 fa-xl txtc-air"></i>
+        <i class="fa-solid fa-grip-lines fa-rotate-180 fa-xl txtc-air txt-shadow"></i>
     </div>
   </div>
 </nav>
