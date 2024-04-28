@@ -31,9 +31,9 @@ This project is styled mobile-first.
   - [Documentation](https://github.com/rspec/rspec-rails) -- Followed this one for setting up
 - Font Awesome
   - [Installation](https://docs.fontawesome.com/web/use-with/ruby-on-rails#add-those-icons)
-### Component References
+### References
 - [UI Verse](https://uiverse.io/)
-  - Loaders 
+- [Transitions](https://www.transition.style/)
 
 ## Development
 ### Gem installed

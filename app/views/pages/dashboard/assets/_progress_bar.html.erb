@@ -1,11 +1,11 @@
-<div class="progress" role="progressbar">
+<div class="user-asset-bar progress" role="progressbar">
     <% if is_gain? %>
         <div class="progress-bar bg-success progress-bar-striped progress-bar-animated font-monospace" 
         style="width: <%= portfolio_performance_percentage %>%">
             <%= portfolio_performance_percentage.round(2) %>%
         </div>
         </div>
-        <small class="font-monospace">
+        <small class="pbar-desc font-robo txtc-air">
             Total Buy Value: $ <%= get_transaction_value %> (+<%= (get_market_value - get_transaction_value).round(2) %>)
         </small>
     <% else %>
@@ -14,7 +14,7 @@
             <%= portfolio_performance_percentage.round(2) %>%
         </div>
         </div>
-        <small class="font-monospace">
+        <small class="pbar-desc font-robo txtc-air fw-light">
             Total Buy Value: $ <%= get_transaction_value %> (<%= (get_market_value - get_transaction_value).round(2) %>)
         </small>
     <% end %>

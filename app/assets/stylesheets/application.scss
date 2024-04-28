@@ -4,7 +4,8 @@
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "admin_dashboard";
+@import "user_dashboard";
 @import "navbar";
 @import "loader";
 @import "stock_component";
-@import "admin_dashboard";
