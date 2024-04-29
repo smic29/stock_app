@@ -4,6 +4,7 @@
             <%= data["symbol"] %>: 
         </h4>
             <% price = data["prices"].sample %>
+            <canvas data-controller="result-chart" data-result-data="<%= data['quote'].to_json %>"></canvas>
             <div class="mb-1">
                 Current Market Price: $ <%= price %> <br>
                 52-week High: $ <%= data["yearHigh"] %> <br>

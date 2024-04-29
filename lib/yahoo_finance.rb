@@ -64,6 +64,9 @@ module YahooFinance
       result["yearHigh"] = misc_data['fiftyTwoWeekHigh']
       result["yearLow"] = misc_data['fiftyTwoWeekLow']
       result["previousClose"] = misc_data['chartPreviousClose']
+      result["quote"] = base[0]["indicators"]["quote"][0]
+      result["quote"]["timestamps"] = base[0]["timestamp"]
+
       result
     end
 

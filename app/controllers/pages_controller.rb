@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [ :quote, :dashboard, :chart_data ]
+  before_action :set_stock_data_service, only: [ :dashboard, :quote ]
 
   def home
     redirect_to admin_path if current_user&.admin
@@ -7,7 +8,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    save_stock_data_to_cookies if current_user
+    @stock_data_service.save_stock_data_to_redis(current_user) if current_user
   end
 
   def quote
@@ -16,16 +17,20 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       symbol = params[:symbol]
+      stock_data = @stock_data_service.retrieve_stock_data_from_redis(current_user)
 
-      unless session[:symbol_data][symbol]
-        session[:symbol_data].update(lookup_symbol(symbol))
+      unless stock_data[symbol]
+        new_data = lookup_symbol(symbol)
+        stock_data[new_data.key(0)] = new_data[symbol.upcase]
+
+        @stock_data_service.add_data_to_redis(current_user, stock_data)
       end
+      formatted_ts = stock_data[symbol]['quote']['timestamps'].map { |ts| Time.at(ts).strftime('%Y-%m-%d') }
 
-      @data = session[:symbol_data][symbol]
+      @quote_data = stock_data[symbol]['quote'].merge('timestamps' => formatted_ts)
+      @data = stock_data[symbol]
 
-      puts @data
-      puts session[:symbol_data][params[:symbol]]
-
+      puts @data['quote']
       format.turbo_stream
     end if request.post?
   end
@@ -102,11 +107,7 @@ class PagesController < ApplicationController
     data
   end
 
-  def save_stock_data_to_cookies
-    if session[:symbol_data].nil? || session[:symbol_data_updated_at].nil? || session[:symbol_data_updated_at] < 24.hours.ago
-      session[:symbol_data] = lookup_symbol(current_user.stocks.not_zero.distinct.pluck(:symbol))
-      session[:symbol_data_updated_at] = Time.current
-    end
+  def set_stock_data_service
+    @stock_data_service = StockDataService.new
   end
-
 end
