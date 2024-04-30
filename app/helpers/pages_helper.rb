@@ -75,4 +75,8 @@ module PagesHelper
   def get_share_quantity(symbol)
     current_user.stocks.not_zero.find_by(symbol: symbol).quantity
   end
+
+  def user_poor?(price, symbol)
+    current_user.cash < price && current_user.stocks.not_zero.find_by(symbol: symbol).nil?
+  end
 end

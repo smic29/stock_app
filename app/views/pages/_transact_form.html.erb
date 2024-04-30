@@ -1,4 +1,5 @@
 <div id="transaction-form" class="bgc-air p-3 rounded border">
+    <% unless user_poor?(price, key) %>
     <%= form_with(model: current_user.transactions.new, url: transactions_path, method: "post") do |f| %>
         <%= f.hidden_field :symbol, value: key %>
         <%= f.hidden_field :price, value: price %>
@@ -42,5 +43,10 @@
             </div>
         <% end %>
         </div>
+    <% end %>
+    <% else %>
+    <div class="text-center fs-3 fw-semibold font-mont">
+        Current assets are not enough to transact with this stock.
+    </div>
     <% end %>
 </div>
