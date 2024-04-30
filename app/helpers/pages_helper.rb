@@ -71,4 +71,8 @@ module PagesHelper
       '<i class="fa-solid fa-arrow-down fa-sm text-danger"></i>'.html_safe
     end
   end
+
+  def get_share_quantity(symbol)
+    current_user.stocks.not_zero.find_by(symbol: symbol).quantity
+  end
 end
