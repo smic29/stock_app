@@ -29,3 +29,25 @@
       top: -1rem;
     }
 }
+
+// Quote Component
+.ticker-tape {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-item {
+  display: inline-block;
+  padding: 0 10px; /* Adjust padding as needed */
+  animation: ticker-scroll 30s linear infinite; /* Adjust speed as needed */
+}
+
+.ticker-symbol {
+  margin-right: 2.5px;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}

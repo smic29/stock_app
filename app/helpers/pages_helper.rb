@@ -53,4 +53,14 @@ module PagesHelper
 
     total
   end
+
+  def price_arrow
+    arrow = rand(1..2)
+
+    if arrow == 1
+      "<i class='fa-solid fa-arrow-up fa-xs text-success'></i>".html_safe
+    else
+      '<i class="fa-solid fa-arrow-down fa-xs text-danger"></i>'.html_safe
+    end
+  end
 end

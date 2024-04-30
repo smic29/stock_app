@@ -27,6 +27,14 @@
     </div>
     <% end %>
     <%= turbo_frame_tag "quote_result_frame" do %>
-        
+        <div class="ticker-tape user-select-none">
+            <% @popular_symbols.each do |symbol, price| %>
+            <div class="ticker-item font-monospace">
+                <span class="ticker-symbol"><%= symbol %></span>
+                <span class="ticker-price"><%= price %></span>
+                <%= price_arrow %>
+            </div>
+            <% end %>
+        </div>
     <% end %>
 <% end %>

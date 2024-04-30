@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
   def quote
     @samples = TickerGenerator.generate_samples(3)
+    @popular_symbols = TickerGenerator.generate_ticker_scroll(20)
     @owned_tickers = current_user.stocks.order(quantity: :desc).limit(3)
 
     respond_to do |format|
