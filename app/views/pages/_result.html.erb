@@ -7,21 +7,21 @@
             <canvas data-controller="result-chart" data-result-data="<%= data['quote'].to_json %>"></canvas>
             <div class="mb-1">
                 <div class="row">
-                    <div class="col-6 font-mont bgc-air p-1">
+                    <div class="col-6 font-mont bgc-air border rounded">
                         <div class="fw-semibold">Current Price</div>
                         <div class="font-monospace">$ <%= number_with_precision(price, precision: 2) %></div>
                     </div>
                     <div class="col-6 font-mont">
                         <div>52-week High</div>
-                        <div class="font-monospace">$ <%= data["yearHigh"] %></div>
+                        <div class="font-monospace hstack gap-1">$ <%= data["yearHigh"] %><%= compare_arrow(price, data["yearHigh"]) %></div>
                     </div>
                     <div class="col-6 font-mont">
                         <div>52-week Low</div>
-                        <div class="font-monospace">$ <%= data["yearLow"] %></div>
+                        <div class="font-monospace hstack gap-1">$ <%= data["yearLow"] %><%= compare_arrow(price, data["yearLow"]) %></div>
                     </div>
                     <div class="col-6 font-mont">
                         <div>Previous Close</div>
-                        <div class="font-monospace">$ <%= data["previousClose"] %></div>
+                        <div class="font-monospace hstack gap-1">$ <%= data["previousClose"] %><%= compare_arrow(price, data["previousClose"]) %></div>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <%= render partial: 'pages/transact_form', locals: { key: data["symbol"], price: price} %>
             <% end %>
     <% else %>
-        <div>
+        <div class="font-mont text-center">
         Invalid Stock or Stock doesn't exist. 
         </div>
     <% end %>

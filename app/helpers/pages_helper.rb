@@ -63,4 +63,12 @@ module PagesHelper
       '<i class="fa-solid fa-arrow-down fa-xs text-danger"></i>'.html_safe
     end
   end
+
+  def compare_arrow(price, comparison)
+    if price > comparison
+      "<i class='fa-solid fa-arrow-up fa-sm text-success'></i>".html_safe
+    else
+      '<i class="fa-solid fa-arrow-down fa-sm text-danger"></i>'.html_safe
+    end
+  end
 end
