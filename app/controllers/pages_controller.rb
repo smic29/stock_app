@@ -13,7 +13,7 @@ class PagesController < ApplicationController
 
   def quote
     @samples = TickerGenerator.generate_samples(3)
-    @owned_tickers = current_user.stocks
+    @owned_tickers = current_user.stocks.order(quantity: :desc).limit(3)
 
     respond_to do |format|
       symbol = params[:symbol]
@@ -21,16 +21,15 @@ class PagesController < ApplicationController
 
       unless stock_data[symbol]
         new_data = lookup_symbol(symbol)
-        stock_data[new_data.key(0)] = new_data[symbol.upcase]
 
-        @stock_data_service.add_data_to_redis(current_user, stock_data)
+        unless new_data[symbol].nil? && new_data[symbol] == 'No data found'
+          stock_data.merge!(new_data)
+          @stock_data_service.add_data_to_redis(current_user, stock_data)
+        end
       end
-      formatted_ts = stock_data[symbol]['quote']['timestamps'].map { |ts| Time.at(ts).strftime('%Y-%m-%d') }
 
-      @quote_data = stock_data[symbol]['quote'].merge('timestamps' => formatted_ts)
       @data = stock_data[symbol]
 
-      puts @data['quote']
       format.turbo_stream
     end if request.post?
   end
