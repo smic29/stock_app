@@ -22,7 +22,7 @@ class PagesController < ApplicationController
       unless stock_data[symbol]
         new_data = lookup_symbol(symbol)
 
-        unless new_data[symbol].nil? && new_data[symbol] == 'No data found'
+        unless new_data[symbol].nil?
           stock_data.merge!(new_data)
           @stock_data_service.add_data_to_redis(current_user, stock_data)
         end

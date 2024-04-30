@@ -39,7 +39,7 @@ module YahooFinance
           hash_result.store(sym, process_output(JSON.parse(response.body)))
         else
           puts "Failed to fetch data for symbol #{sym}. HTTP Status: #{response.code}"
-          hash_result.store(sym, "No data found")
+          hash_result.store(sym, nil)
         end
       end
 
