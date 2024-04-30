@@ -1,15 +1,29 @@
-<div class="my-2">
+<div class="my-3">
     <% unless data.nil? || data == 'No data found' %>
-        <h4>
-            <%= data["symbol"] %>: 
+        <h4 class="font-mont fw-bold">
+            <%= data["symbol"] %>
         </h4>
             <% price = data["prices"].sample %>
             <canvas data-controller="result-chart" data-result-data="<%= data['quote'].to_json %>"></canvas>
             <div class="mb-1">
-                Current Market Price: $ <%= price %> <br>
-                52-week High: $ <%= data["yearHigh"] %> <br>
-                52-week Low: $ <%= data["yearLow"] %> <br>
-                previousClose: $ <%= data["previousClose"] %>
+                <div class="row">
+                    <div class="col-6 font-mont bgc-air p-1">
+                        <div class="fw-semibold">Current Price</div>
+                        <div class="font-monospace">$ <%= number_with_precision(price, precision: 2) %></div>
+                    </div>
+                    <div class="col-6 font-mont">
+                        <div>52-week High</div>
+                        <div class="font-monospace">$ <%= data["yearHigh"] %></div>
+                    </div>
+                    <div class="col-6 font-mont">
+                        <div>52-week Low</div>
+                        <div class="font-monospace">$ <%= data["yearLow"] %></div>
+                    </div>
+                    <div class="col-6 font-mont">
+                        <div>Previous Close</div>
+                        <div class="font-monospace">$ <%= data["previousClose"] %></div>
+                    </div>
+                </div>
             </div>
             <br>
             <% if current_user.approved? && price != nil %>
