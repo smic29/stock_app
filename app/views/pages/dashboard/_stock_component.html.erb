@@ -17,7 +17,7 @@
                     Get Quote</a>
             </div>
             <div class="icon-div">
-                <span class="fs-3 fw-semibold font-mont"><%= current_user.stocks.count %></span>
+                <span class="fs-3 fw-semibold font-mont"><%= current_user.stocks.not_zero.count %></span>
             </div>
             <div class="icon-div">
                 <span class="fs-3 fw-semibold font-mont"><%= stock_quantity %></span>

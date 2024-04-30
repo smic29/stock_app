@@ -47,7 +47,7 @@ module PagesHelper
 
   def stock_quantity
     total = 0
-    current_user.stocks.each do |stock|
+    current_user.stocks.not_zero.each do |stock|
       total += stock.quantity
     end
 
