@@ -25,6 +25,11 @@ export default class extends Controller {
     if (turboFrame.id !== "user_frame" && turboFrame.id !== "admin_dash") {
       return
     }
+
+    if (turboFrame.src.includes('?')) {
+      return 
+    }
+    
     const links = this.element.querySelectorAll('a')
 
     links.forEach((link) => {
