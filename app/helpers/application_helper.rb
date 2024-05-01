@@ -25,4 +25,13 @@ module ApplicationHelper
       content_tag(:i, '', class: "fa-solid fa-xl #{icon} #{user_tag}")
     end
   end
+
+  def will_paginate(collection_or_options = nil, options = {})
+    if collection_or_options.is_a?(Hash)
+      options, collection_or_options = collection_or_options, nil
+    end
+
+    options[:renderer] ||= BootstrapLinkRenderer
+    super(collection_or_options, options)
+  end
 end
