@@ -5,7 +5,7 @@ module PagesHelper
       stock_data_service = StockDataService.new
       stock_data = stock_data_service.retrieve_stock_data_from_redis(current_user)
 
-      user_stocks = current_user.stocks
+      user_stocks = current_user.stocks.not_zero
 
       user_stocks.each do |stock|
         prices = stock_data[stock.symbol]["prices"]
