@@ -16,4 +16,7 @@ module StocksHelper
     cached_data[stock]['previousClose']
   end
 
+  def display_long_name(symbol, cached_data)
+    cached_data[symbol]['name']
+  end
 end

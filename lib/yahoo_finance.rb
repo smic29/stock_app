@@ -36,7 +36,9 @@ module YahooFinance
         # puts uri # This is for when I want to check the data.
 
         if response.is_a?(Net::HTTPSuccess)
-          hash_result.store(sym, process_output(JSON.parse(response.body)))
+          quote_data = process_output(JSON.parse(response.body))
+          quote_type_data = quote_type(sym)
+          hash_result.store(sym, quote_data.merge({ "name" => quote_type_data })) if quote_data && quote_type_data
         else
           puts "Failed to fetch data for symbol #{sym}. HTTP Status: #{response.code}"
           hash_result.store(sym, nil)
@@ -72,6 +74,23 @@ module YahooFinance
 
     def convert_to_arr(symbol)
       symbol.instance_of?(Array) ? symbol : [symbol]
+    end
+
+    def quote_type(symbol)
+      uri = URI("#{API_URL}/v1/finance/quoteType/?symbol=#{symbol}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.read_timeout = 10
+      request = Net::HTTP::Get.new(uri)
+      request['User-Agent'] = "SpicyStockApp/1.0"
+      response = http.request(request)
+
+      if response.is_a?(Net::HTTPSuccess)
+        JSON.parse(response.body)["quoteType"]["result"][0]["longName"]
+      else
+        puts "Failed to fetch quote type data for symbol #{symbol}. HTTP Status: #{response.code}"
+        nil
+      end
     end
   end
 end
