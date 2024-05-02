@@ -18,10 +18,11 @@
             <div class="mb-3 font-robo col-6">
                 <div class="input-group">
                     <div class="form-floating">
-                        <input id="userShare" type="text" disabled readonly class="form-control" value="<%= get_share_quantity(key) %>">
+                        <input id="userShare" type="text" disabled readonly class="form-control" value="<%= pluralize(get_share_quantity(key), 'shre') %>">
                         <label><%= key %></label>
                     </div>
-                    <span class="input-group-text"><%= pluralize(get_share_quantity(key), 'share') %></span>
+                    <span class="input-group-text"><%= average_buy_price(current_user.stocks.find_by(symbol: key)) %></span>
+
                 </div>
             </div>
             <% end %>
