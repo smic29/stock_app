@@ -52,24 +52,25 @@ module YahooFinance
     private
 
     def process_output(json)
-      result = {}
-      base = json["chart"]["result"]
-      return nil if base == nil
+      chart_result = json.dig('chart', 'result')
+      return nil if chart_result.nil?
 
-      prices = base[0]["indicators"]["adjclose"][0]["adjclose"]
-      misc_data = base[0]['meta']
+      indicators = chart_result.first['indicators']
+      meta_data = chart_result.first['meta']
 
-      return nil if prices == nil
+      adjclose = indicators.dig('adjclose', 0, 'adjclose')
+      return nil if adjclose.nil?
 
-      result["prices"] = prices.map { |price| price.round(2) } # sample.round(2)
-      result["symbol"] = misc_data['symbol']
-      result["yearHigh"] = misc_data['fiftyTwoWeekHigh']
-      result["yearLow"] = misc_data['fiftyTwoWeekLow']
-      result["previousClose"] = misc_data['chartPreviousClose']
-      result["quote"] = base[0]["indicators"]["quote"][0]
-      result["quote"]["timestamps"] = base[0]["timestamp"]
+      quote = indicators.dig('quote', 0)
 
-      result
+      {
+        "prices" => adjclose.map { |price| price.round(2) },
+        "symbol" => meta_data['symbol'],
+        "yearHigh" => meta_data['fiftyTwoWeekHigh'],
+        "yearLow" => meta_data['fiftyTwoWeekLow'],
+        "previousClose" => meta_data['chartPreviousClose'],
+        "quote" => quote.merge("timestamps" => chart_result.first['timestamp'])
+      }
     end
 
     def convert_to_arr(symbol)

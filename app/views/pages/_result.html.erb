@@ -1,7 +1,7 @@
 <div class="my-3">
     <% unless data.nil? || data == 'No data found' %>
         <h4 class="font-mont fw-bold">
-            <%= data["symbol"] %>
+            <%= data["symbol"] %> | <%= data["name"] %>
         </h4>
             <% price = data["prices"].sample %>
             <canvas data-controller="result-chart" data-result-data="<%= data['quote'].to_json %>"></canvas>
