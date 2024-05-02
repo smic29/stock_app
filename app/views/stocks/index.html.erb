@@ -1,15 +1,36 @@
 <%= turbo_frame_tag "user_frame" do %>
-    <h1>Portfolio</h1>
+    <div class="container">
+        <div class="row bgc-light-blue p-2 mb-3 rounded-bottom-5 text-center shadow-dark-blue">
+            <h3 class="font-mont txtc-air txt-shadow">Portfolio</h3>
+        </div>
 
-    <div class="d-flex flex-column text-center">
-        <% @stocks.each do |stock| %>
-            <div>
-                <%= stock.symbol %>
-                <%= stock.quantity %>
-                Average Price: $ <%= average_buy_price(stock) %>
+        <div class="row mx-auto">
+            <%# keeping this for future usage 
+             render 'stocks/carousel', { stocks: @stocks, cached_data: @cached_data }  
+             %>
+
+            <% @stocks.each do |stock| %>
+            <div class="bgc-air col-12 mb-3 rounded-3 shadow-sm-light-blue mx-auto p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="col-4 d-flex flex-column">
+                        <span class="fw-semibold font-robo txt-shadow txtc-gray-blue"><%= stock.symbol %></span>
+                        <span class="font-robo small"><%= pluralize(stock.quantity,'share') %></span>
+                    </div>
+                    <div class="col-4 text-center d-flex flex-column">
+                        <span class="smallest-boi">Average Buy Price</span>
+                        <span class="font-monospace fw-semibold">$ <%= average_buy_price(stock) %></span>
+                        <span class="font-robo fw-light small">
+                            <%= ((total_value(stock)/get_transaction_value) * 100).round(2) %>% of Portfolio
+                        </span>
+                    </div>
+                    <div class="col-4 text-end">
+                        <a href="/" class="text-reset">
+                            <i class="fa-solid fa-square-up-right fa-xl txtc-gray-blue"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-        <% end %>
+            <% end %>
+        </div>
     </div>
-
-    <%= link_to 'Back', root_path %>
 <% end %>

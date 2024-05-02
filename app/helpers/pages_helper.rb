@@ -20,8 +20,10 @@ module PagesHelper
 
   def get_transaction_value
     @transaction_value ||= begin
-      buy_transactions = current_user.transactions.where(type: 'Buy').sum(:price)
-      sell_transactions = current_user.transactions.where(type: 'Sell').sum(:price)
+      user_stocks = current_user.stocks.not_zero
+
+      buy_transactions = current_user.transactions.where(type: 'Buy', stock_id: user_stocks.pluck(:id) ).sum { |txn| txn.price * txn.quantity }
+      sell_transactions = current_user.transactions.where(type: 'Sell', stock_id: user_stocks.pluck(:id)).sum { |txn| txn.price * txn.quantity }
 
       net_transaction_value = buy_transactions - sell_transactions
 

@@ -8,4 +8,12 @@ module StocksHelper
     average_buy_price.round(2)
   end
 
+  def total_value(stock)
+    stock.quantity * average_buy_price(stock)
+  end
+
+  def previous_close_price(stock, cached_data)
+    cached_data[stock]['previousClose']
+  end
+
 end
