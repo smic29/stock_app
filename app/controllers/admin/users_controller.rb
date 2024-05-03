@@ -43,7 +43,14 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      render :show
+      respond_to do |format|
+        flash[:notice] = "Successfully updated user"
+        format.html { redirect_to @user }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.append("alert-container", partial: "shared/alerts"),
+          turbo_stream.replace("modal_frame", template: "admin/users/show")
+        ]}
+      end
     else
       render :edit, status: :unprocessable_entity
     end
