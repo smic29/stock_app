@@ -22,7 +22,10 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.turbo_stream
+        flash[:notice] = 'User successfully created. Email sent'
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.append("alert-container", partial: "shared/alerts")
+        ]}
         AdminMailer.with(user: @user, password: @password).welcome_email.deliver_later
       else
         format.html { render :new, status: :unprocessable_entity }
