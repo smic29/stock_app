@@ -1,6 +1,14 @@
-<tr id=<%= dom_id(user)%> data-bs-toggle="modal" data-bs-target="#appModal" data-action="click->modal#open" data-controller="modal" href=<%= admin_user_url(user) %>>
+<tr id=<%= dom_id(user)%> data-bs-toggle="modal" data-bs-target="#appModal" data-action="click->modal#open" data-controller="modal" href=<%= admin_user_url(user) %> class="p-2">
     <td><%= user.email %></td>
-    <td><%= user.cash %></td>
-    <td class="text-center"><%= user.approved ? "1" : "0" %></td>
-    <td class="text-center"><%= user.confirmed? %></td>
+    <td class="text-center">
+        <% if user.approved && user.confirmed? %>
+        <small class="bgc-light-blue txtc-air p-1 px-2 rounded bold">Verified Trader</small>
+        <% end %>
+        <% unless user.approved? %>
+        <small class="bgc-dark-blue txtc-air p-1 rounded px-2">Pending Trader</small>
+        <% end %>
+        <% unless user.confirmed? %>
+        <small class="bgc-sunset txtc-air p-1 px-2 rounded">Unverified User</small>
+        <% end %>
+    </td>
 </tr>
