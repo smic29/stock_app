@@ -12,4 +12,10 @@ class User < ApplicationRecord
 
   has_many :stocks
   has_many :transactions
+
+  after_create_commit -> {
+    broadcast_replace_later_to "admin_dashboard_stream",
+    target: "admin_user_component",
+    partial: "admin/dashboard/users_component"
+  }
 end

@@ -4,7 +4,7 @@
         <% if user.approved && user.confirmed? %>
         <small class="bgc-light-blue txtc-air p-1 px-2 rounded bold">Verified Trader</small>
         <% end %>
-        <% unless user.approved? %>
+        <% if !user.approved? && user.confirmed? %>
         <small class="bgc-dark-blue txtc-air p-1 rounded px-2">Pending Trader</small>
         <% end %>
         <% unless user.confirmed? %>

@@ -1,13 +1,13 @@
 <%= turbo_frame_tag "modal_frame" do %>
 <div>
     <% if @user.approved && @user.confirmed? %>
-        <small class="bgc-light-blue txtc-air p-1 px-2 rounded bold">Verified Trader</small>
-        <% end %>
-        <% unless @user.approved? %>
-        <small class="bgc-dark-blue txtc-air p-1 rounded px-2">Pending Trader</small>
-        <% end %>
-        <% unless @user.confirmed? %>
-        <small class="bgc-sunset txtc-air p-1 px-2 rounded">Unverified User</small>
+    <small class="bgc-light-blue txtc-air p-1 px-2 rounded bold">Verified Trader</small>
+    <% end %>
+    <% if !@user.approved? && @user.confirmed? %>
+    <small class="bgc-dark-blue txtc-air p-1 rounded px-2">Pending Trader</small>
+    <% end %>
+    <% unless @user.confirmed? %>
+    <small class="bgc-sunset txtc-air p-1 px-2 rounded">Unverified User</small>
     <% end %>
     <div class="d-flex">
         <div class="form-floating my-2">

@@ -1,5 +1,6 @@
 <%= turbo_frame_tag "admin_dash" do %>
     <div class="container-fluid">
+        <%= turbo_stream_from "admin_dashboard_stream" %>
         <%= render 'admin/dashboard/users_component' %>
         <%= render 'admin/dashboard/transactions_component' %>
     </div>
