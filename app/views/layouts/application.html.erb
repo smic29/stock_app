@@ -13,6 +13,11 @@
   </head>
 
   <body>
+    <div id="alert-container">
+      <% if notice %>
+        <%= render 'shared/alerts' %>
+      <% end %>
+    </div>
     <% if user_signed_in? %>
       <main class="vh-100">
         <%= yield %>
