@@ -22,4 +22,11 @@ module AdminHelper
       content_tag(:i, nil, class: "fa-solid fa-hand-holding-dollar fa-xl txtc-air")
     end
   end
+
+  def bought_or_sold_number(transaction)
+    verb = is_buy?(transaction) ? 'Bought' : 'Sold'
+    noun = pluralize(transaction.quantity, 'share')
+
+    "#{verb} #{noun}"
+  end
 end
