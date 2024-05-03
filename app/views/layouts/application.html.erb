@@ -13,8 +13,8 @@
   </head>
 
   <body>
-    <div id="alert-container">
-      <% if notice %>
+    <div id="alert-container" class="position-absolute container-fluid">
+      <% if notice or alert %>
         <%= render 'shared/alerts' %>
       <% end %>
     </div>

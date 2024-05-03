@@ -30,7 +30,7 @@ class PagesController < ApplicationController
       end
 
       @data = stock_data[symbol]
-
+      # flash[:notice] = "Quote Generated" ## Used to test flash messages
       format.turbo_stream
     end if request.post?
   end

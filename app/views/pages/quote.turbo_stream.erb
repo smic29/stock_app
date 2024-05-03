@@ -1,3 +1,9 @@
 <%= turbo_stream.update("quote_result_frame") do %>
     <%= render partial: "pages/result", locals: { data: @data, quote: @quote_data } %>
 <% end %>
+
+<%#  This block was used to test alert messages without adding to the database
+ turbo_stream.append("alert-container") do 
+    render partial: "shared/alerts"
+ end 
+%>
