@@ -13,6 +13,11 @@
   </head>
 
   <body>
+    <div id="alert-container" class="position-absolute container-fluid">
+      <% if notice or alert %>
+        <%= render 'shared/alerts' %>
+      <% end %>
+    </div>
     <main class="vh-100">
       <%= yield %>
     </main>
