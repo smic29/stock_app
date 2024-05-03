@@ -8,3 +8,7 @@
 @import "user_dashboard";
 @import "navbar";
 @import "loader";
+
+.alert {
+    z-index: 999999;
+}
