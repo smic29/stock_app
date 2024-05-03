@@ -1,26 +1,30 @@
 <%= turbo_frame_tag "admin_dash" do %>
-
-    <%= link_to 'Back', admin_path %>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">Email</th>
-                    <th scope="col">Requested</th>
-                    <th scope="col">Approve?</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <% @users.each do |user| %>
-                <tr id=<%= dom_id(user)%>>
-                    <td><%= user.email %></td>
-                    <td class="small"><%= "#{time_ago_in_words user.confirmed_at} ago" %></td>
-                    <td>
-                        <%= button_to "Approve", user_approve_path(user.id), method: :patch, class: "btn btn-sm btn-outline-success" %>
-                    </td>
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
+    <div class="container-fluid mb-5">
+        <div class="row bgc-gray-blue p-2 mb-3 rounded-bottom-5 text-center shadow-sm-sunset sticky-top">
+            <h3 class="font-mont txtc-air txt-shadow fw-bold">
+                Pending Trade Approval
+            </h3>
+        </div>
+        <div class="table-responsive font-robo row">
+            <table class="table table-striped table-sm table-bordered align-middle">
+                <thead class='bgc-dark-blue'>
+                    <tr>
+                        <th scope="col" class="text-white text-center">Email</th>
+                        <th scope="col" class="text-white text-center" colspan="2">Approve?</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <% @users.each do |user| %>
+                    <tr id=<%= dom_id(user)%>>
+                        <td><%= user.email %></td>
+                        <td class="text-center">
+                            <%= button_to "Approve", user_approve_path(user.id), method: :patch, class: "btn btn-sm custom-btn" %>
+                        </td>
+                        <td class="smallest-boi text-center"><%= "#{time_ago_in_words user.confirmed_at} ago" %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
 <% end %>
