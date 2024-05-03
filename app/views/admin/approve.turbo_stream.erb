@@ -1,1 +1,2 @@
 <%= turbo_stream.remove(@user)%>
+<%= turbo_stream.append("alert-container", partial: 'shared/alerts') %>

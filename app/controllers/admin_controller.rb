@@ -10,12 +10,13 @@ class AdminController < ApplicationController
   end
 
   def pending
-    @users = User.is_pending_approval.order(:confirmed_at)
+    @users = User.is_pending_approval.order(confirmed_at: :desc)
   end
 
   def approve
-    unless @user.approved && @user.confirmed?
+    if !@user.approved && @user.confirmed?
       if @user.update(approved: true)
+        flash[:notice] = "User has been approved. Email Sent"
         respond_to do |format|
           format.turbo_stream
         end
