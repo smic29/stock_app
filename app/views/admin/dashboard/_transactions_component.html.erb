@@ -1,7 +1,7 @@
-<div class="row mt-3 gx-2">
+<div id="admin_transactions_component" class="row mt-3 gx-2">
     <div class="col-12 mx-auto border rounded p-2 d-flex flex-column shadow shadow-dark-blue">
         <h6 class="border-bottom border-2 mb-3 py-1 text-center font-mont fw-bold">Recent Transactions</h6>
-    <% @transactions.each do |transaction| %>
+    <% transactions.each do |transaction| %>
         <div class="d-flex justify-content-between align-items-center mb-2 px-2 position-relative rounded-3 shadow-sm shadow-sm-earth">
             <div class="d-flex align-items-center gap-3">
                 <div class="bgc-gray-blue rounded-circle p-2 my-1" >

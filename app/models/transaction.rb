@@ -13,6 +13,14 @@ class Transaction < ApplicationRecord
   validate :check_cash_balance, if: :buy_transaction?
   validate :check_stock_quantity, if: :sell_transaction?
 
+  after_create_commit -> {
+    latest_transactions = Transaction.order(created_at: :desc).limit(5).to_a
+    broadcast_replace_later_to "admin_dashboard_stream",
+    target: "admin_transactions_component",
+    partial: "admin/dashboard/transactions_component",
+    locals: { transactions: latest_transactions }
+  }
+
   def self.transact(user, commit, transaction_params)
     ActiveRecord::Base.transaction do
       # Prepare parameters for transaction create
