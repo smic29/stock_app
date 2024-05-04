@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <%= turbo_stream_from "admin_dashboard_stream" %>
         <%= render 'admin/dashboard/users_component' %>
+        <%= turbo_stream_from "admin_transactions_stream" %>
         <%= render 'admin/dashboard/transactions_component', transactions: @transactions %>
     </div>
 <% end %>

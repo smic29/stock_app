@@ -15,7 +15,7 @@ class Transaction < ApplicationRecord
 
   after_create_commit -> {
     latest_transactions = Transaction.order(created_at: :desc).limit(5).to_a
-    broadcast_replace_later_to "admin_dashboard_stream",
+    broadcast_replace_later_to "admin_transactions_stream",
     target: "admin_transactions_component",
     partial: "admin/dashboard/transactions_component",
     locals: { transactions: latest_transactions }

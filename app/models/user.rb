@@ -18,4 +18,12 @@ class User < ApplicationRecord
     target: "admin_user_component",
     partial: "admin/dashboard/users_component"
   }
+
+  after_update_commit -> {
+    if saved_changes.include?("confirmed_at")
+      broadcast_replace_later_to "admin_dashboard_stream",
+      target: "admin_user_component",
+      partial: "admin/dashboard/users_component"
+    end
+  }
 end
