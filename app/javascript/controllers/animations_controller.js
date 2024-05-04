@@ -6,11 +6,13 @@ export default class extends Controller {
     this.animateIn()
 
     document.addEventListener('turbo:before-frame-render', async (e) => {
-      e.preventDefault()
-
-      await this.animateOut()
-
-      e.detail.resume()
+      if (e.target.id === 'admin_dash') {
+        e.preventDefault()
+  
+        await this.animateOut()
+  
+        e.detail.resume()
+      }
     })
   }
 
