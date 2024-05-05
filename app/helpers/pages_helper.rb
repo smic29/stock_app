@@ -34,6 +34,7 @@ module PagesHelper
   def portfolio_performance_percentage
     @percentage_value ||= begin
       transaction_value = get_transaction_value
+      return 0 if transaction_value == 0
 
       market_value = get_market_value
 
