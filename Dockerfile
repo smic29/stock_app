@@ -64,5 +64,6 @@ COPY docker-entrypoint.sh /usr/bin
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
+COPY --link puma.rb /rails/config/puma.rb
+ENTRYPOINT ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
