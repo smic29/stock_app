@@ -21,7 +21,11 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config redis-server nodejs
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config redis-server
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends curl && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -50,6 +54,8 @@ RUN apt-get update -qq && \
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
+COPY --from=build /usr/bin/node /usr/bin/node
+COPY --from=build /usr/lib/nodejs /usr/lib/nodejs
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
