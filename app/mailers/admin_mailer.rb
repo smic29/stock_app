@@ -1,5 +1,5 @@
 class AdminMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: ENV['EMAIL_ADDRESS']
   default template_path: 'admin/mailer'
 
   def welcome_email
