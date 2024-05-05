@@ -21,7 +21,7 @@ gem "sqlite3", "~> 1.4"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-gem 'will_paginate', '~> 4.0'
+gem 'will_paginate', '~> 3.3.0'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
