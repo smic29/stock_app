@@ -10,7 +10,8 @@ class TransactionsController < ApplicationController
         flash[:notice] = "#{params[:commit]} transaction completed"
         format.turbo_stream { render turbo_stream: [
           turbo_stream.update("transaction-form", partial: "pages/transact_form", locals: { key: transaction_params[:symbol], price: transaction_params[:price].to_f }),
-          turbo_stream.append("alert-container", partial: "shared/alerts")
+          turbo_stream.append("alert-container", partial: "shared/alerts"),
+          turbo_stream.update("user_frame", template: "pages/dashboard")
         ]}
       end
     end
