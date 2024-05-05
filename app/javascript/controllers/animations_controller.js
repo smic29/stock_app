@@ -6,7 +6,7 @@ export default class extends Controller {
     this.animateIn()
 
     document.addEventListener('turbo:before-frame-render', async (e) => {
-      if (e.target.id === 'admin_dash') {
+      if (e.target.id === 'admin_dash' || e.target.id === 'user_frame') {
         e.preventDefault()
   
         await this.animateOut()
