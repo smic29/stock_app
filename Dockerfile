@@ -11,7 +11,8 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    REDIS_URL="redis://redis:6379/1"
 
 
 # Throw-away build stage to reduce size of final image
@@ -19,7 +20,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config redis-server && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -55,6 +56,7 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Entrypoint prepares the database.
+COPY docker-entrypoint.sh /usr/bin
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
