@@ -21,18 +21,13 @@ A Ruby on Rails project made for Avion School
 - [x] I want to see all the transactions so that I can monitor the transaction flow of the app.
 
 ## Styles & Tests
-This project is styled mobile-first.
+This project is styled mobile-first. That being said, it's best viewed in a **412 x 914** screen.
 
 ### Gems Installed
-- Bootstrap 
-  - [Installation](https://www.rubydoc.info/gems/bootstrap/5.3.2)
-- Rspec 
-  - [Installation](https://rubygems.org/gems/rspec)
-  - [Documentation](https://github.com/rspec/rspec-rails) -- Followed this one for setting up
-- Font Awesome
-  - [Installation](https://docs.fontawesome.com/web/use-with/ruby-on-rails#add-those-icons)
-- [will_paginate](https://github.com/mislav/will_paginate)
-- redis
+- [Bootstrap](https://www.rubydoc.info/gems/bootstrap/5.3.2)
+- [Rspec](https://github.com/rspec/rspec-rails)
+- [Font Awesome](https://docs.fontawesome.com/web/use-with/ruby-on-rails#add-those-icons)
+- Redis
 ### References
 - [UI Verse](https://uiverse.io/)
 - [Transitions](https://www.transition.style/)
