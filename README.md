@@ -1,5 +1,5 @@
 # Stock App
-A Ruby on Rails project made for Avion School
+A Ruby on Rails project made for Avion School. Alongside the requirements that would highlight CRUD actions, this project also shows basic usage of Hotwire Turbo and Stimulus, as well as broadcasts through ActionCable using redis.
 
 ## Requirements
 ### User
