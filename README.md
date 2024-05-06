@@ -450,3 +450,54 @@ $ rails g rspec:install
 - [ ] Controllers
 - [ ] Views
 - [x] Custom Endpoint Query
+
+## Deployment
+### Railway.app
+[StockApp](stockapp-production.up.railway.app)
+
+### Process:
+I previously had several issues with deploying a project on railway.app, but on this project, I was able to successfully get through the hoops and deploy my project properly.
+
+The first issue I encountered was always the secret_key_base, I didn't fully understand why it always failed at precompile time:
+```dockerfile
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+```
+The fix for this was to simply get the secret_key_base in `credentials.yml.enc` which can be accessed by using `EDITOR=vim rails credentials:edit`. From there we just need to set an ENV variable in railway.app under the deployed repository.
+
+
+The next common issue was execJS runtime error, this was fixed by this code:
+```dockerfile
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config redis-server curl && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs
+```
+The rails out-of-the-box Dockerfile would include up to `pkg-config`. But it won't be done from there because we also need to copy it:
+```dockerfile
+COPY --from=build /usr/bin/node /usr/bin/node
+```
+This line should be added under the comment: `# Copy built artifacts: gems, application`
+
+Finally for the issue of booting puma and the server constantly restarting:
+```sh
+# puma.rb
+max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
+threads min_threads_count, max_threads_count
+
+worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "production"
+
+port ENV.fetch("PORT") { 3000 }
+
+environment ENV.fetch("RAILS_ENV") { "production" }
+
+plugin :tmp_restart
+```
+The above file would usually be located under `config/puma.rb` but the above code would need to be saved in the root directory. Then in the Dockerfile:
+
+```dockerfile
+# Start the server by default, this can be overwritten at runtime
+COPY puma.rb /rails/config/puma.rb
+ENTRYPOINT ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+EXPOSE 3000
+```
