@@ -5,8 +5,7 @@ module YahooFinance
   class Query
     API_URL = "https://query1.finance.yahoo.com"
 
-    # I have no idea what this does, but I think it has something to do with using Redis so
-    # I'm keeping it here.
+    # Being based off of the basic_yahoo_finance gem, I failed to find the usage for this.
     def initialize(cache_url = nil)
       @cache_url = cache_url
     end
@@ -15,25 +14,14 @@ module YahooFinance
       hash_result = {}
       symbols = convert_to_arr(symbol)
 
-      # Experienced some symbols returning empty values. I'm not sure what's causing that.
-      et_time_now = Time.now.in_time_zone('Eastern Time (US & Canada)')
-      start_time = et_time_now - 7.days
-      end_ts = et_time_now.to_i
-      start_ts = start_time.to_i
+      # Experienced some symbols returning empty values. I'm not sure what's causing that, so I added the calculation of time.
+      start_ts, end_ts = generate_time
 
       symbols.each do |sym|
         next if sym.nil?
 
-        uri = URI("#{API_URL}/v7/finance/chart/#{sym}?period1=#{start_ts}&period2=#{end_ts}&interval=1d&events=history&includeAdjustedClose=true")
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.read_timeout = 10
-
-        request = Net::HTTP::Get.new(uri)
-        request['User-Agent'] = "SpicyStockApp/1.0"
-
-        response = http.request(request)
-        # puts uri # This is for when I want to check the data.
+        uri = build_uri('/v7/finance/chart/', sym, period1: start_ts, period2: end_ts, interval: '1d', events: 'history', includeAdjustedClose: true)
+        response = http_request(uri)
 
         if response.is_a?(Net::HTTPSuccess)
           quote_data = process_output(JSON.parse(response.body))
@@ -50,6 +38,42 @@ module YahooFinance
 
 
     private
+
+    def build_uri(endpoint, symbol_or_params = nil, params = {})
+      if symbol_or_params.is_a?(Hash)
+        params = symbol_or_params
+        symbol = nil
+      else
+        symbol = symbol_or_params
+      end
+
+      endpoint += "#{symbol}" if symbol
+
+      uri = URI.join(API_URL, endpoint)
+      uri.query = URI.encode_www_form(params) unless params.empty?
+
+      uri
+    end
+
+    def generate_time
+      et_time_now = Time.now.in_time_zone('Eastern Time (US & Canada)')
+      start_time = et_time_now - 7.days
+      end_ts = et_time_now.to_i
+      start_ts = start_time.to_i
+
+      [start_ts, end_ts]
+    end
+
+    def http_request(uri)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.read_timeout = 10
+
+      request = Net::HTTP::Get.new(uri)
+      request['User-Agent'] = "SpicyStockApp/1.0"
+
+      http.request(request)
+    end
 
     def process_output(json)
       chart_result = json.dig('chart', 'result')
@@ -78,13 +102,8 @@ module YahooFinance
     end
 
     def quote_type(symbol)
-      uri = URI("#{API_URL}/v1/finance/quoteType/?symbol=#{symbol}")
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.read_timeout = 10
-      request = Net::HTTP::Get.new(uri)
-      request['User-Agent'] = "SpicyStockApp/1.0"
-      response = http.request(request)
+      uri = build_uri('/v1/finance/quoteType/', symbol: symbol)
+      response = http_request(uri)
 
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)["quoteType"]["result"][0]["longName"]
