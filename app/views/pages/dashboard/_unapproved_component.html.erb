@@ -21,12 +21,13 @@
     <div class="row rounded-4 shadow bgc-air p-1 mx-1 mt-3">
         <div class="mb-3">
             While you wait, why not try looking up the current prices of the stocks you've been watching...
+            or get some memes...
         </div>
         <div>
             <%= turbo_frame_tag "modal_frame", src: quote_path %>
         </div>
     </div>
 </div>
-<div>
-    <img src="<%= @meme_for_you %>" alt="some random meme" class="img-fluid">
+<div class="mt-3 rounded-3 mb-5 pb-5">
+    <img src="<%= @meme.custom('stocks') %>" alt="some random meme" class="img-fluid">
 </div>
