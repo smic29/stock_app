@@ -1,9 +1,18 @@
 require 'json'
 
 class Memegen::Response
-  def self.parse_keyword_results(response)
-    parsed_response = JSON.parse(response.body)
+  attr_reader :raw_response
 
-    parsed_response.sample['url']
+  def initialize(response)
+    @raw_response = response
   end
+
+  def success?
+    raw_response.code == '200'
+  end
+
+  def data
+    JSON.parse(raw_response.body)
+  end
+
 end
