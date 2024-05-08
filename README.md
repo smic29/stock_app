@@ -1,6 +1,9 @@
 # Stock App
 A Ruby on Rails project made for Avion School. Alongside the requirements that would highlight CRUD actions, this project also shows basic usage of Hotwire Turbo and Stimulus, as well as broadcasts through ActionCable using redis.
 
+* Presentation: [YouTube](https://youtu.be/IEknvZEOrOw)
+* Site: [Railway.app](stockapp-production.up.railway.app)
+
 ## Requirements
 ### User
 - [x] I want to create an account to buy and sell stocks
