@@ -496,3 +496,49 @@ COPY puma.rb /rails/config/puma.rb
 ENTRYPOINT ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 EXPOSE 3000
 ```
+
+## API wrappers
+### Memegen API
+* [Source](https://api.memegen.link/docs/)
+#### Usage
+The following helpers are made available for use in views:
+```ruby
+def memegen_images
+  @images ||= Memegen::Resources::Images.new(memegen_client)
+end
+
+def memegen_templates
+  @templates ||= Memegen::Resources::Templates.new(memegen_client)
+end
+```
+These helpers will allow for the usage of each of their methods:
+```ruby
+# Images
+
+# keyword can be whatever
+def custom(keyword)
+  response = @client.get('images/custom', filter: sanitize_string(keyword))
+
+  response.data.is_a?(Hash) ? generate(template_id: 'fry', text: ['not sure if it exists', 'or code is bad']) : response.data.sample['url']
+end
+
+# needs template_id: and text: []
+def generate(settings = {})
+  response = @client.post('images', settings)
+  response.data['url']
+end
+
+# Templates
+def templates
+  response = @client.get('templates')
+
+  response.data
+end
+```
+
+To render them in the view, for images you can do `<%= memegen_images.custom(your_keyword)%>`. For the list of all available templates, they can be iterated like so: `<% memegen_templates.templates.each do |template| %>`
+
+#### Process
+Reading on different resources, I chose to go with separating each responsibility to different classes that are all namespaced under `Memegen`. `Memegen::Client` contains the get and post method calls, while `Memegen::Response` parses the data and contains a method to determine success.
+
+This is currently a work in progress and I'll probably add error handlers soon.
