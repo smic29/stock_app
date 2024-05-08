@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :stocks, only: [ :index ]
   end
 
+  get 'memes' => "memes#home"
+
   # Defines the root path route ("/")
   root "pages#home"
 end
