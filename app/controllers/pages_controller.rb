@@ -9,9 +9,6 @@ class PagesController < ApplicationController
 
   def dashboard
     @stock_data_service.save_stock_data_to_redis(current_user) if current_user
-
-    client = Memegen::Client.new
-    @meme = Memegen::Resources::Images.new(client)
   end
 
   def quote

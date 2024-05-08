@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ApiWrapperHelper
+
   def pending_users_count
     User.is_pending_approval.count
   end
@@ -26,10 +28,4 @@ module ApplicationHelper
     end
   end
 
-  def memegen
-    client = Memegen::Client.new
-    meme = Memegen::Resources::Images.new(client)
-
-    meme
-  end
 end
